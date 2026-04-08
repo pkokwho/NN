@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任年友 | 数字宇宙</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-pink: #ff00ff;
+            --neon-purple: #8b5cf6;
+            --dark-bg: #0a0a0f;
+            --dark-secondary: #1a1a2e;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s, background 0.3s;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--neon-pink);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .cursor.hover {
+            transform: scale(2);
+            background: var(--neon-blue);
+        }
+
+        /* Background Grid */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 15s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--neon-pink);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--neon-blue);
+            bottom: -50px;
+            right: -50px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--neon-purple);
+            top: 50%;
+            left: 50%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, 50px) scale(1.1); }
+            50% { transform: translate(0, 100px) scale(1); }
+            75% { transform: translate(-50px, 50px) scale(0.9); }
+        }
+
+        /* Navigation - Circular */
+        .nav-circle {
+            position: fixed;
+            top: 50%;
+            right: 3rem;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .nav-dot::before {
+            content: attr(data-label);
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+            color: var(--neon-blue);
+        }
+
+        .nav-dot:hover::before {
+            opacity: 1;
+        }
+
+        .nav-dot.active {
+            background: var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        .nav-dot:hover {
+            transform: scale(1.3);
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+        }
+
+        /* Hero Section - Central Core */
+        .hero-core {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .core-ring {
+            position: absolute;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        .core-ring-1 {
+            width: 300px;
+            height: 300px;
+            border-top-color: var(--neon-blue);
+            border-right-color: var(--neon-blue);
+        }
+
+        .core-ring-2 {
+            width: 350px;
+            height: 350px;
+            border-bottom-color: var(--neon-pink);
+            border-left-color: var(--neon-pink);
+            animation-direction: reverse;
+            animation-duration: 15s;
+        }
+
+        .core-ring-3 {
+            width: 400px;
+            height: 400px;
+            border-top-color: var(--neon-purple);
+            border-bottom-color: var(--neon-purple);
+            animation-duration: 25s;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .core-center {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: glitch 5s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-2px, 2px); }
+            94% { transform: translate(2px, -2px); }
+            96% { transform: translate(-2px, -2px); }
+            98% { transform: translate(2px, 2px); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-tag {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--neon-blue);
+            border-radius: 25px;
+            font-size: 0.85rem;
+            color: var(--neon-blue);
+            transition: all 0.3s;
+        }
+
+        .hero-tag:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px var(--neon-blue);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .scroll-hint span {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--neon-blue);
+        }
+
+        .scroll-line {
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--neon-blue), transparent);
+            animation: scrollDown 2s infinite;
+        }
+
+        @keyframes scrollDown {
+            0%, 100% { opacity: 1; transform: translateY(0); }
+            50% { opacity: 0.5; transform: translateY(20px); }
+        }
+
+        /* About Section - Data Stream */
+        .about-container {
+            max-width: 900px;
+            position: relative;
+        }
+
+        .data-flow {
+            position: absolute;
+            left: -50px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--neon-blue), transparent);
+            animation: dataPulse 2s infinite;
+        }
+
+        @keyframes dataPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .about-content {
+            padding-left: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .about-text p::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+            font-weight: bold;
+        }
+
+        /* Stats Section - Holographic Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(10, 10, 15, 0.8));
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            border-color: var(--neon-blue);
+            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.3);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Hobbies Section - 3D Cards */
+        .hobbies-container {
+            display: flex;
+            gap: 3rem;
+            max-width: 1200px;
+            perspective: 1000px;
+        }
+
+        .hobby-card {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(10, 10, 15, 0.9));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: all 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .hobby-card:hover {
+            transform: rotateY(10deg) rotateX(5deg) translateZ(30px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.4);
+        }
+
+        .hobby-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            text-align: center;
+            filter: drop-shadow(0 0 20px var(--neon-purple));
+        }
+
+        .hobby-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--neon-purple);
+        }
+
+        .hobby-desc {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+
+        .hobby-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        .hobby-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: var(--neon-purple);
+        }
+
+        /* Contact Section - Terminal Style */
+        .terminal {
+            background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
+            border: 1px solid var(--neon-green);
+            border-radius: 15px;
+            overflow: hidden;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 255, 128, 0.2);
+        }
+
+        .terminal-header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-btn.red { background: #ff5f56; }
+        .terminal-btn.yellow { background: #ffbd2e; }
+        .terminal-btn.green { background: #27ca40; }
+
+        .terminal-title {
+            margin-left: 1rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .terminal-body {
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .terminal-line {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .terminal-prompt {
+            color: var(--neon-green);
+            margin-right: 1rem;
+        }
+
+        .terminal-text {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+        }
+
+        .terminal-text a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .terminal-text a:hover {
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .cursor-blink {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: var(--neon-green);
+            animation: blink 1s infinite;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid rgba(0, 245, 255, 0.1);
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        footer span {
+            color: var(--neon-pink);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hobbies-container {
+                flex-direction: column;
+            }
+
+            .nav-circle {
+                right: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-dot {
+                display: none;
+            }
+
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .core-ring-1 { width: 200px; height: 200px; }
+            .core-ring-2 { width: 250px; height: 250px; }
+            .core-ring-3 { width: 300px; height: 300px; }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .nav-circle {
+                display: none;
+            }
+
+            .about-content {
+                padding-left: 0;
+            }
+
+            .data-flow {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-name {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .hobby-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <nav class="nav-circle">
+        <div class="nav-dot active" data-section="0" data-label="首页"></div>
+        <div class="nav-dot" data-section="1" data-label="关于"></div>
+        <div class="nav-dot" data-section="2" data-label="数据"></div>
+        <div class="nav-dot" data-section="3" data-label="爱好"></div>
+        <div class="nav-dot" data-section="4" data-label="联系"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="section" data-index="0">
+        <div class="hero-core">
+            <div class="core-ring core-ring-1"></div>
+            <div class="core-ring core-ring-2"></div>
+            <div class="core-ring core-ring-3"></div>
+            <div class="core-center">
+                <h1 class="hero-name">任年友</h1>
+                <p class="hero-subtitle">Digital Universe Explorer</p>
+                <div class="hero-tags">
+                    <span class="hero-tag">💪 健身达人</span>
+                    <span class="hero-tag">🎹 钢琴爱好者</span>
+                    <span class="hero-tag">😄 幽默担当</span>
+                    <span class="hero-tag">✨ 数字游民</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>探索</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" data-index="1">
+        <div class="about-container">
+            <div class="data-flow"></div>
+            <div class="about-content">
+                <h2 class="section-title">// 关于我</h2>
+                <div class="about-text">
+                    <p>欢迎来到我的数字宇宙！我是任年友，一个在现实与虚拟之间穿梭的探索者。</p>
+                    <p>健身是我与身体对话的方式，每一次举铁都是对极限的挑战，每一滴汗水都是成长的印记。</p>
+                    <p>钢琴是我灵魂的避难所，黑白键上流淌的旋律，带我穿越时空，抵达内心最深处的宁静。</p>
+                    <p>幽默是我的生活哲学，笑声是宇宙中最强大的能量，我愿成为传递这份能量的使者。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section" data-index="2">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">热情指数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">正能量</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">MAX</div>
+                <div class="stat-label">幽默感</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">7</div>
+                <div class="stat-label">周健身</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section class="section" data-index="3">
+        <div class="hobbies-container">
+            <div class="hobby-card">
+                <span class="hobby-icon">🏋️</span>
+                <h3 class="hobby-title">健身达人</h3>
+                <p class="hobby-desc">
+                    在健身房这个战场，我与自己较量。每一次突破极限，都是对自我的超越。
+                    力量、耐力、意志，在这里融为一体。
+                </p>
+                <div class="hobby-tags">
+                    <span class="hobby-tag">力量训练</span>
+                    <span class="hobby-tag">有氧运动</span>
+                    <span class="hobby-tag">自律</span>
+                </div>
+            </div>
+            <div class="hobby-card">
+                <span class="hobby-icon">🎹</span>
+                <h3 class="hobby-title">钢琴爱好者</h3>
+                <p class="hobby-desc">
+                    指尖在黑白键上起舞，音符在空中编织成梦。从古典到流行，
+                    每一首曲子都是一次心灵的旅行。
+                </p>
+                <div class="hobby-tags">
+                    <span class="hobby-tag">古典音乐</span>
+                    <span class="hobby-tag">流行曲目</span>
+                    <span class="hobby-tag">音乐疗愈</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" data-index="4">
+        <div class="terminal" style="--neon-green: #00ff80;">
+            <div class="terminal-header">
+                <div class="terminal-btn red"></div>
+                <div class="terminal-btn yellow"></div>
+                <div class="terminal-btn green"></div>
+                <span class="terminal-title">contact@rennianyou — zsh</span>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">➜</span>
+                    <span class="terminal-text">欢迎来到我的终端！请选择联系方式：</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">➜</span>
+                    <span class="terminal-text">
+                        <br>QQ: <a href="tencent://message/?uin=2493580059">2493580059</a>
+                        <br>微信: w1234w3w
+                        <br>电话: <a href="tel:18319191164">18319191164</a>
+                    </span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">➜</span>
+                    <span class="terminal-text">期待与你连接...<span class="cursor-blink"></span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Designed & Built by <span>任年友</span> © 2026</p>
+    </footer>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+            cursorDot.style.left = e.clientX - 3 + 'px';
+            cursorDot.style.top = e.clientY - 3 + 'px';
+        });
+
+        document.querySelectorAll('a, .nav-dot, .hero-tag, .stat-card, .hobby-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Navigation
+        const sections = document.querySelectorAll('.section');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                sections[index].scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Intersection Observer for nav dots
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = parseInt(entry.target.dataset.index);
+                    navDots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Parallax effect for orbs
+        document.addEventListener('mousemove', (e) => {
+            const orbs = document.querySelectorAll('.orb');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 20;
+                orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+
+        // Add hover effect to terminal links
+        const terminalLinks = document.querySelectorAll('.terminal-text a');
+        terminalLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.style.background = 'var(--neon-blue)';
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.style.background = '';
+            });
+        });
+    </script>
+</body>
+</html>
