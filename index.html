@@ -786,9 +786,27 @@
         }
       }
 
-      /* Comments Section */
-      .comments-section {
-        margin-top: 1.5rem;
+      /* Comments Section - 完全独立，确保在所有设备上完美显示 */
+      #utterances-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 400px;
+        position: relative;
+        z-index: 1;
+      }
+
+      #utterances-container .utterances {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      #utterances-container .utterances-frame {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        position: relative !important;
+        left: 0 !important;
+        right: 0 !important;
       }
 
       /* Footer */
@@ -896,6 +914,12 @@
 
         .media-gallery {
           grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* 移动端评论区优化 */
+        #utterances-container {
+          padding: 0 !important;
+          margin: 0 !important;
         }
       }
     </style>
@@ -1108,19 +1132,24 @@
 
     <!-- Comments Section -->
     <section class="section" data-index="4">
-      <div class="about-container">
-        <div class="about-content">
-          <h2 class="section-title">💬 留言板</h2>
-          <div class="comments-section">
-            <script
-              src="https://utteranc.es/client.js"
-              repo="pkokwho/NN"
-              issue-term="pathname"
-              theme="github-dark"
-              crossorigin="anonymous"
-              async
-            ></script>
-          </div>
+      <div
+        style="
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 4rem 2rem;
+        "
+      >
+        <h2 class="section-title">💬 留言板</h2>
+        <div id="utterances-container" style="width: 100%; margin-top: 2rem">
+          <script
+            src="https://utteranc.es/client.js"
+            repo="pkokwho/NN"
+            issue-term="pathname"
+            theme="github-dark"
+            crossorigin="anonymous"
+            async
+          ></script>
         </div>
       </div>
     </section>
