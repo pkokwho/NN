@@ -786,29 +786,6 @@
         }
       }
 
-      /* Comments Section - 完全独立，确保在所有设备上完美显示 */
-      #utterances-container {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-height: 400px;
-        position: relative;
-        z-index: 1;
-      }
-
-      #utterances-container .utterances {
-        width: 100% !important;
-        max-width: 100% !important;
-      }
-
-      #utterances-container .utterances-frame {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 100% !important;
-        position: relative !important;
-        left: 0 !important;
-        right: 0 !important;
-      }
-
       /* Footer */
       footer {
         text-align: center;
@@ -915,12 +892,6 @@
         .media-gallery {
           grid-template-columns: repeat(2, 1fr);
         }
-
-        /* 移动端评论区优化 */
-        #utterances-container {
-          padding: 0 !important;
-          margin: 0 !important;
-        }
       }
     </style>
   </head>
@@ -935,8 +906,7 @@
       <div class="nav-dot" data-section="1" data-label="关于"></div>
       <div class="nav-dot" data-section="2" data-label="数据"></div>
       <div class="nav-dot" data-section="3" data-label="爱好"></div>
-      <div class="nav-dot" data-section="4" data-label="留言"></div>
-      <div class="nav-dot" data-section="5" data-label="联系"></div>
+      <div class="nav-dot" data-section="4" data-label="联系"></div>
     </nav>
 
     <!-- Hero Section -->
@@ -1130,32 +1100,8 @@
       </div>
     </section>
 
-    <!-- Comments Section -->
-    <section class="section" data-index="4">
-      <div
-        style="
-          width: 100%;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 4rem 2rem;
-        "
-      >
-        <h2 class="section-title">💬 留言板</h2>
-        <div id="utterances-container" style="width: 100%; margin-top: 2rem">
-          <script
-            src="https://utteranc.es/client.js"
-            repo="pkokwho/NN"
-            issue-term="pathname"
-            theme="github-dark"
-            crossorigin="anonymous"
-            async
-          ></script>
-        </div>
-      </div>
-    </section>
-
     <!-- Contact Section -->
-    <section class="section" data-index="5">
+    <section class="section" data-index="4">
       <div class="terminal" style="--neon-green: #00ff80">
         <div class="terminal-header">
           <div class="terminal-btn red"></div>
