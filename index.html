@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>任年友 | 个人介绍</title>
+    <title>任年友</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Inter:wght@300;400&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -18,557 +18,368 @@
       }
 
       :root {
-        --neon-blue: #00f5ff;
-        --neon-pink: #ff00ff;
-        --neon-purple: #8b5cf6;
-        --neon-green: #00ff80;
-        --dark-bg: #0a0a0f;
-        --dark-secondary: #1a1a2e;
+        --bg: #f7f5f2;
+        --bg-alt: #edeae5;
+        --text: #1a1a1a;
+        --text-secondary: #6b6b6b;
+        --text-muted: #9e9e9e;
+        --accent: #8b7355;
+        --accent-light: #c4b5a5;
+        --border: #d9d4cc;
+        --border-light: #e8e4dd;
+        --white: #ffffff;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
-        font-family: "Noto Sans SC", sans-serif;
-        background: var(--dark-bg);
-        color: white;
-        overflow-x: hidden;
+        font-family: "Noto Serif SC", "Inter", serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
-      /* Custom Cursor - Disabled to fix video interaction */
-      .cursor {
-        display: none;
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 2rem;
       }
 
-      .cursor-dot {
-        display: none;
-      }
-
-      /* Background Grid */
-      .grid-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image:
-          linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
-        background-size: 50px 50px;
-        z-index: 0;
-        animation: gridMove 20s linear infinite;
-      }
-
-      @keyframes gridMove {
-        0% {
-          transform: perspective(500px) rotateX(60deg) translateY(0);
-        }
-        100% {
-          transform: perspective(500px) rotateX(60deg) translateY(50px);
-        }
-      }
-
-      /* Floating Orbs */
-      .orb {
-        position: fixed;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: 0.5;
-        animation: float 15s ease-in-out infinite;
-        z-index: 0;
-      }
-
-      .orb-1 {
-        width: 400px;
-        height: 400px;
-        background: var(--neon-pink);
-        top: -100px;
-        left: -100px;
-        animation-delay: 0s;
-      }
-
-      .orb-2 {
-        width: 300px;
-        height: 300px;
-        background: var(--neon-blue);
-        bottom: -50px;
-        right: -50px;
-        animation-delay: -5s;
-      }
-
-      .orb-3 {
-        width: 250px;
-        height: 250px;
-        background: var(--neon-purple);
-        top: 50%;
-        left: 50%;
-        animation-delay: -10s;
-      }
-
-      @keyframes float {
-        0%,
-        100% {
-          transform: translate(0, 0) scale(1);
-        }
-        25% {
-          transform: translate(50px, 50px) scale(1.1);
-        }
-        50% {
-          transform: translate(0, 100px) scale(1);
-        }
-        75% {
-          transform: translate(-50px, 50px) scale(0.9);
-        }
-      }
-
-      /* Navigation - Circular */
-      .nav-circle {
+      /* Navigation */
+      .nav-line {
         position: fixed;
         top: 50%;
-        right: 3rem;
+        right: 2.5rem;
         transform: translateY(-50%);
         z-index: 1000;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        align-items: center;
+        gap: 1.25rem;
       }
 
       .nav-dot {
-        width: 12px;
-        height: 12px;
-        border: 2px solid var(--neon-blue);
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
+        background: var(--border);
         cursor: pointer;
-        position: relative;
-        transition: all 0.3s;
-      }
-
-      .nav-dot::before {
-        content: attr(data-label);
-        position: absolute;
-        right: 30px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        opacity: 0;
-        transition: opacity 0.3s;
-        white-space: nowrap;
-        color: var(--neon-blue);
-      }
-
-      .nav-dot:hover::before {
-        opacity: 1;
+        transition: all 0.6s ease;
       }
 
       .nav-dot.active {
-        background: var(--neon-blue);
-        box-shadow: 0 0 20px var(--neon-blue);
+        background: var(--text);
+        transform: scale(1.8);
       }
 
       .nav-dot:hover {
-        transform: scale(1.3);
+        background: var(--accent);
+        transform: scale(1.5);
+      }
+
+      .nav-label {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        white-space: nowrap;
+        font-family: "Inter", sans-serif;
+        pointer-events: none;
+      }
+
+      .nav-dot:hover .nav-label {
+        opacity: 1;
       }
 
       /* Sections */
       .section {
         min-height: 100vh;
-        position: relative;
-        z-index: 1;
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 4rem;
+        padding: 6rem 0;
       }
 
-      /* Hero Section - Central Core */
-      .hero-core {
+      /* Hero */
+      .hero {
         position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
       }
 
-      .core-ring {
-        position: absolute;
-        border: 2px solid transparent;
-        border-radius: 50%;
-        animation: rotate 20s linear infinite;
-      }
-
-      .core-ring-1 {
-        width: 300px;
-        height: 300px;
-        border-top-color: var(--neon-blue);
-        border-right-color: var(--neon-blue);
-      }
-
-      .core-ring-2 {
-        width: 350px;
-        height: 350px;
-        border-bottom-color: var(--neon-pink);
-        border-left-color: var(--neon-pink);
-        animation-direction: reverse;
-        animation-duration: 15s;
-      }
-
-      .core-ring-3 {
-        width: 400px;
-        height: 400px;
-        border-top-color: var(--neon-purple);
-        border-bottom-color: var(--neon-purple);
-        animation-duration: 25s;
-      }
-
-      @keyframes rotate {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .core-center {
-        text-align: center;
-        z-index: 1;
+      .hero-inner {
+        padding: 0 0 3rem 0;
       }
 
       .hero-name {
-        font-family: "Orbitron", monospace;
-        font-size: 4rem;
-        font-weight: 900;
-        background: linear-gradient(
-          135deg,
-          var(--neon-blue),
-          var(--neon-pink),
-          var(--neon-purple)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 1rem;
-        animation: glitch 5s infinite;
-      }
-
-      @keyframes glitch {
-        0%,
-        90%,
-        100% {
-          transform: translate(0);
-        }
-        92% {
-          transform: translate(-2px, 2px);
-        }
-        94% {
-          transform: translate(2px, -2px);
-        }
-        96% {
-          transform: translate(-2px, -2px);
-        }
-        98% {
-          transform: translate(2px, 2px);
-        }
+        font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+        font-size: clamp(3.5rem, 8vw, 7rem);
+        font-weight: 300;
+        color: var(--text);
+        line-height: 1;
+        letter-spacing: 0.02em;
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeUp 1.2s ease 0.2s forwards;
       }
 
       .hero-subtitle {
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.7);
-        letter-spacing: 4px;
+        font-size: 1rem;
+        font-weight: 300;
+        color: var(--text-secondary);
+        letter-spacing: 0.3em;
         text-transform: uppercase;
-        margin-bottom: 2rem;
+        margin-bottom: 4rem;
+        opacity: 0;
+        animation: fadeUp 1.2s ease 0.5s forwards;
+      }
+
+      .hero-line {
+        width: 60px;
+        height: 1px;
+        background: var(--accent-light);
+        margin-bottom: 4rem;
+        opacity: 0;
+        animation: fadeUp 1.2s ease 0.7s forwards;
       }
 
       .hero-tags {
         display: flex;
-        gap: 1rem;
+        gap: 2rem;
         flex-wrap: wrap;
-        justify-content: center;
+        opacity: 0;
+        animation: fadeUp 1.2s ease 0.9s forwards;
       }
 
       .hero-tag {
-        padding: 0.5rem 1.5rem;
-        border: 1px solid var(--neon-blue);
-        border-radius: 25px;
-        font-size: 0.85rem;
-        color: var(--neon-blue);
-        transition: all 0.3s;
+        font-family: "Inter", "Noto Serif SC", sans-serif;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        letter-spacing: 0.15em;
+        position: relative;
+        padding-bottom: 0.5rem;
       }
 
-      .hero-tag:hover {
-        background: var(--neon-blue);
-        color: var(--dark-bg);
-        box-shadow: 0 0 30px var(--neon-blue);
-      }
-
-      .scroll-hint {
+      .hero-tag::after {
+        content: "";
         position: absolute;
-        bottom: 3rem;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--border);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.4s ease;
       }
 
-      .scroll-hint span {
-        font-size: 0.75rem;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: var(--neon-blue);
+      .hero-tag:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
       }
 
-      .scroll-line {
-        width: 2px;
-        height: 60px;
-        background: linear-gradient(to bottom, var(--neon-blue), transparent);
-        animation: scrollDown 2s infinite;
-      }
-
-      @keyframes scrollDown {
-        0%,
-        100% {
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
           opacity: 1;
           transform: translateY(0);
         }
-        50% {
-          opacity: 0.5;
-          transform: translateY(20px);
-        }
       }
 
-      /* About Section - Data Stream */
-      .about-container {
-        max-width: 900px;
-        position: relative;
-      }
-
-      .data-flow {
+      .scroll-indicator {
         position: absolute;
-        left: -50px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: linear-gradient(
-          to bottom,
-          transparent,
-          var(--neon-blue),
-          transparent
-        );
-        animation: dataPulse 2s infinite;
+        bottom: 3rem;
+        left: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
       }
 
-      @keyframes dataPulse {
+      .scroll-indicator span {
+        font-family: "Inter", sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      .scroll-line {
+        width: 1px;
+        height: 40px;
+        background: var(--border);
+        animation: scrollPulse 3s ease-in-out infinite;
+      }
+
+      @keyframes scrollPulse {
         0%,
         100% {
-          opacity: 0.5;
+          opacity: 0.3;
         }
         50% {
-          opacity: 1;
+          opacity: 0.8;
         }
       }
 
-      .about-content {
-        padding-left: 3rem;
+      /* About */
+      .about-inner {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 4rem;
+        align-items: start;
       }
 
-      .section-title {
-        font-family: "Orbitron", monospace;
-        font-size: 3rem;
+      .section-label {
+        font-family: "Inter", sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--text-muted);
         margin-bottom: 2rem;
-        position: relative;
-        display: inline-block;
       }
 
-      .section-title::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+      .section-heading {
+        font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--text);
       }
 
       .about-text {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
+        font-weight: 300;
+        color: var(--text-secondary);
         line-height: 2;
-        color: rgba(255, 255, 255, 0.8);
       }
 
       .about-text p {
-        margin-bottom: 1.5rem;
-        position: relative;
-        padding-left: 2rem;
+        margin-bottom: 2rem;
       }
 
-      .about-text p::before {
-        content: ">";
-        position: absolute;
-        left: 0;
-        color: var(--neon-pink);
-        font-weight: bold;
+      .about-text p:last-child {
+        margin-bottom: 0;
       }
 
-      /* Stats Section - Holographic Cards */
+      /* Stats */
       .stats-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-        max-width: 1200px;
+        gap: 1px;
+        background: var(--border-light);
       }
 
       .stat-card {
-        background: linear-gradient(
-          135deg,
-          rgba(26, 26, 46, 0.8),
-          rgba(10, 10, 15, 0.8)
-        );
-        border: 1px solid rgba(0, 245, 255, 0.2);
-        border-radius: 20px;
-        padding: 3rem 2rem;
+        background: var(--bg);
+        padding: 4rem 2rem;
         text-align: center;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.5s;
-      }
-
-      .stat-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(0, 245, 255, 0.1),
-          transparent
-        );
-        transition: left 0.5s;
-      }
-
-      .stat-card:hover::before {
-        left: 100%;
+        transition: background 0.4s ease;
       }
 
       .stat-card:hover {
-        transform: translateY(-10px) rotateX(5deg);
-        border-color: var(--neon-blue);
-        box-shadow: 0 20px 60px rgba(0, 245, 255, 0.3);
+        background: var(--bg-alt);
       }
 
       .stat-number {
-        font-family: "Orbitron", monospace;
+        font-family: "Cormorant Garamond", serif;
         font-size: 3.5rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 0.5rem;
+        font-weight: 300;
+        color: var(--text);
+        margin-bottom: 0.75rem;
       }
 
       .stat-label {
-        font-size: 1rem;
-        color: rgba(255, 255, 255, 0.7);
+        font-family: "Inter", sans-serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
         text-transform: uppercase;
-        letter-spacing: 2px;
+        color: var(--text-muted);
       }
 
-      /* Hobbies Section - 3D Cards */
-      .hobbies-container {
-        display: flex;
+      /* Hobbies */
+      .hobbies-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 3rem;
-        max-width: 1200px;
-        perspective: 1000px;
       }
 
       .hobby-card {
-        flex: 1;
-        background: linear-gradient(
-          135deg,
-          rgba(26, 26, 46, 0.9),
-          rgba(10, 10, 15, 0.9)
-        );
-        border: 1px solid rgba(139, 92, 246, 0.3);
-        border-radius: 20px;
+        background: var(--white);
+        border: 1px solid var(--border-light);
         padding: 3rem;
-        transition: all 0.3s;
+        transition: box-shadow 0.5s ease;
       }
 
       .hobby-card:hover {
-        border-color: var(--neon-purple);
-        box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
+        box-shadow: 0 2px 40px rgba(0, 0, 0, 0.04);
       }
 
       .hobby-icon {
-        font-size: 5rem;
-        margin-bottom: 1.5rem;
+        font-size: 3rem;
+        margin-bottom: 2rem;
         display: block;
-        text-align: center;
-        filter: drop-shadow(0 0 20px var(--neon-purple));
+        opacity: 0.85;
       }
 
       .hobby-title {
-        font-family: "Orbitron", monospace;
+        font-family: "Cormorant Garamond", "Noto Serif SC", serif;
         font-size: 1.8rem;
-        text-align: center;
-        margin-bottom: 1rem;
-        color: var(--neon-purple);
+        font-weight: 500;
+        margin-bottom: 1.25rem;
+        color: var(--text);
       }
 
       .hobby-desc {
-        font-size: 1rem;
-        line-height: 1.8;
-        color: rgba(255, 255, 255, 0.7);
-        text-align: center;
+        font-size: 0.95rem;
+        font-weight: 300;
+        line-height: 1.9;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
       }
 
       .hobby-tags {
         display: flex;
-        gap: 0.5rem;
+        gap: 0.75rem;
         flex-wrap: wrap;
-        margin-top: 1.5rem;
-        justify-content: center;
+        margin-bottom: 2rem;
       }
 
       .hobby-tag {
-        padding: 0.3rem 0.8rem;
-        background: rgba(139, 92, 246, 0.2);
-        border-radius: 15px;
-        font-size: 0.75rem;
-        color: var(--neon-purple);
+        font-family: "Inter", sans-serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        padding: 0.4rem 0;
+        border-bottom: 1px solid var(--border-light);
       }
 
-      /* Media Container */
-      .media-container {
-        margin-top: 1.5rem;
-      }
-
+      /* Image Slider */
       .image-slider {
         position: relative;
         overflow: hidden;
-        border-radius: 15px;
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(139, 92, 246, 0.3);
       }
 
       .image-track {
         display: flex;
-        transition: transform 0.8s ease-in-out;
+        transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
       }
 
       .image-slide {
         flex: 0 0 100%;
-        position: relative;
       }
 
       .image-slide img {
         width: 100%;
-        height: auto;
         display: block;
         object-fit: cover;
       }
@@ -576,34 +387,30 @@
       .image-nav {
         display: flex;
         justify-content: center;
-        gap: 10px;
-        margin-top: 15px;
-      }
-
-      .image-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: rgba(139, 92, 246, 0.3);
-        border: 2px solid var(--neon-purple);
-        cursor: pointer;
-        transition: all 0.3s;
-      }
-
-      .image-dot.active {
-        background: var(--neon-purple);
-        box-shadow: 0 0 15px var(--neon-purple);
-      }
-
-      .image-dot:hover {
-        background: rgba(139, 92, 246, 0.6);
-      }
-
-      /* Video Container */
-      .video-container {
+        gap: 1rem;
         margin-top: 1.5rem;
       }
 
+      .image-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--border);
+        cursor: pointer;
+        transition: all 0.4s ease;
+        border: none;
+      }
+
+      .image-dot.active {
+        background: var(--text);
+        transform: scale(1.5);
+      }
+
+      .image-dot:hover {
+        background: var(--accent);
+      }
+
+      /* Video Gallery */
       .video-gallery {
         position: relative;
         overflow: hidden;
@@ -611,7 +418,7 @@
 
       .video-track {
         display: flex;
-        transition: transform 0.5s ease-in-out;
+        transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
       }
 
       .video-wrapper {
@@ -623,432 +430,320 @@
       .video-wrapper-inner {
         position: relative;
         width: 100%;
-        border-radius: 15px;
         overflow: hidden;
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(139, 92, 246, 0.3);
+        background: #1a1a1a;
       }
 
       .video-wrapper-inner video {
         width: 100%;
         display: block;
-        pointer-events: auto;
-        cursor: pointer;
       }
 
       .video-nav {
         display: flex;
         justify-content: center;
-        gap: 10px;
-        margin-top: 15px;
+        gap: 1rem;
+        margin-top: 1.5rem;
       }
 
       .video-dot {
-        width: 12px;
-        height: 12px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
-        background: rgba(139, 92, 246, 0.3);
-        border: 2px solid var(--neon-purple);
+        background: var(--border);
         cursor: pointer;
-        transition: all 0.3s;
+        transition: all 0.4s ease;
+        border: none;
       }
 
       .video-dot.active {
-        background: var(--neon-purple);
-        box-shadow: 0 0 15px var(--neon-purple);
+        background: var(--text);
+        transform: scale(1.5);
       }
 
       .video-dot:hover {
-        background: rgba(139, 92, 246, 0.6);
+        background: var(--accent);
       }
 
       .video-arrow {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(139, 92, 246, 0.8);
-        border: none;
-        color: white;
+        background: var(--white);
+        border: 1px solid var(--border-light);
+        color: var(--text);
         width: 40px;
         height: 40px;
         border-radius: 50%;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 18px;
         z-index: 10;
-        transition: all 0.3s;
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-family: serif;
       }
 
       .video-arrow:hover {
-        background: var(--neon-purple);
-        box-shadow: 0 0 20px var(--neon-purple);
+        background: var(--bg-alt);
+        border-color: var(--border);
       }
 
       .video-arrow.prev {
-        left: 0;
+        left: 10px;
       }
 
       .video-arrow.next {
-        right: 0;
+        right: 10px;
       }
 
-      /* Contact Section - Terminal Style */
-      .terminal {
-        background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
-        border: 1px solid var(--neon-green);
-        border-radius: 15px;
-        overflow: hidden;
-        max-width: 800px;
-        width: 100%;
-        box-shadow: 0 20px 60px rgba(0, 255, 128, 0.2);
+      /* Contact */
+      .contact-inner {
+        max-width: 600px;
       }
 
-      .terminal-header {
-        background: rgba(0, 0, 0, 0.3);
-        padding: 1rem 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+      .contact-text {
+        font-size: 1.05rem;
+        font-weight: 300;
+        color: var(--text-secondary);
+        line-height: 2;
       }
 
-      .terminal-btn {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-      }
-
-      .terminal-btn.red {
-        background: #ff5f56;
-      }
-      .terminal-btn.yellow {
-        background: #ffbd2e;
-      }
-      .terminal-btn.green {
-        background: #27ca40;
-      }
-
-      .terminal-title {
-        margin-left: 1rem;
-        font-size: 0.85rem;
-        color: rgba(255, 255, 255, 0.6);
-      }
-
-      .terminal-body {
-        padding: 2rem;
-        font-family: "Courier New", monospace;
-      }
-
-      .terminal-line {
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: flex-start;
-      }
-
-      .terminal-prompt {
-        color: var(--neon-green);
-        margin-right: 1rem;
-      }
-
-      .terminal-text {
-        color: rgba(255, 255, 255, 0.9);
-        line-height: 1.8;
-      }
-
-      .terminal-text a {
-        color: var(--neon-blue);
-        text-decoration: none;
-        transition: all 0.3s;
-      }
-
-      .terminal-text a:hover {
-        text-shadow: 0 0 10px var(--neon-blue);
-      }
-
-      .cursor-blink {
-        display: inline-block;
-        width: 10px;
-        height: 20px;
-        background: var(--neon-green);
-        animation: blink 1s infinite;
-        margin-left: 5px;
-      }
-
-      @keyframes blink {
-        0%,
-        50% {
-          opacity: 1;
-        }
-        51%,
-        100% {
-          opacity: 0;
-        }
-      }
-
-      /* Comments Section */
-      .comments-section {
-        margin-top: 1.5rem;
-      }
-
-      .comment-form {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-      }
-
-      .comment-input {
-        flex: 1;
-        padding: 10px 15px;
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(139, 92, 246, 0.3);
-        border-radius: 10px;
-        color: white;
-        font-size: 14px;
-        outline: none;
-        transition: all 0.3s;
-      }
-
-      .comment-input:focus {
-        border-color: var(--neon-purple);
-        box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
-      }
-
-      .comment-input::placeholder {
-        color: rgba(255, 255, 255, 0.4);
-      }
-
-      .comment-button {
-        padding: 10px 20px;
-        background: var(--neon-purple);
-        border: none;
-        border-radius: 10px;
-        color: white;
-        font-size: 14px;
-        cursor: pointer;
-        transition: all 0.3s;
-      }
-
-      .comment-button:hover {
-        background: #9b6cf0;
-        box-shadow: 0 0 15px var(--neon-purple);
-      }
-
-      .comments-list {
+      .contact-links {
         display: flex;
         flex-direction: column;
-        gap: 15px;
-        max-height: 400px;
-        overflow-y: auto;
-        padding: 5px;
+        gap: 1rem;
+        margin-top: 2rem;
       }
 
-      .comment-item {
-        background: rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(139, 92, 246, 0.2);
-        border-radius: 10px;
-        padding: 15px;
-        animation: fadeIn 0.3s ease-in;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .comment-header {
+      .contact-link {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px;
+        gap: 1.5rem;
+        padding: 1.25rem 0;
+        border-bottom: 1px solid var(--border-light);
+        text-decoration: none;
+        color: var(--text);
+        transition: all 0.3s ease;
       }
 
-      .comment-author {
-        font-weight: bold;
-        color: var(--neon-blue);
-        font-size: 14px;
+      .contact-link:hover {
+        padding-left: 0.5rem;
+        border-bottom-color: var(--accent-light);
       }
 
-      .comment-time {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.4);
+      .contact-link-label {
+        font-family: "Inter", sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        min-width: 60px;
       }
 
-      .comment-text {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 14px;
-        line-height: 1.6;
-      }
-
-      .no-comments {
-        text-align: center;
-        color: rgba(255, 255, 255, 0.4);
-        padding: 30px;
-        font-size: 14px;
+      .contact-link-value {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--text);
       }
 
       /* Footer */
       footer {
-        text-align: center;
-        padding: 3rem;
-        position: relative;
-        z-index: 1;
-        border-top: 1px solid rgba(0, 245, 255, 0.1);
+        padding: 4rem 0;
+        border-top: 1px solid var(--border-light);
       }
 
-      footer p {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.9rem;
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
 
       footer span {
-        color: var(--neon-pink);
+        font-family: "Inter", sans-serif;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+      }
+
+      /* Fade-in on scroll */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       /* Responsive */
       @media (max-width: 1024px) {
-        .stats-grid {
-          grid-template-columns: repeat(2, 1fr);
+        .about-inner {
+          grid-template-columns: 1fr;
+          gap: 2rem;
         }
 
-        .hobbies-container {
-          flex-direction: column;
+        .hobbies-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
         }
 
-        .nav-circle {
+        .nav-line {
           right: 1.5rem;
         }
       }
 
       @media (max-width: 768px) {
-        body {
-          cursor: auto;
-        }
-
-        .cursor,
-        .cursor-dot {
-          display: none;
-        }
-
-        .hero-name {
-          font-size: 2.5rem;
-        }
-
-        .core-ring-1 {
-          width: 200px;
-          height: 200px;
-        }
-        .core-ring-2 {
-          width: 250px;
-          height: 250px;
-        }
-        .core-ring-3 {
-          width: 300px;
-          height: 300px;
+        .container {
+          padding: 0 1.5rem;
         }
 
         .section {
-          padding: 2rem 1.5rem;
+          padding: 5rem 0;
         }
 
-        .stats-grid {
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-        }
-
-        .nav-circle {
-          display: none;
-        }
-
-        .about-content {
-          padding-left: 0;
-        }
-
-        .data-flow {
-          display: none;
-        }
-
-        .section-title {
-          font-size: 2rem;
-        }
-      }
-
-      @media (max-width: 480px) {
         .hero-name {
-          font-size: 2rem;
+          font-size: 3rem;
+        }
+
+        .hero-tags {
+          gap: 1.25rem;
+        }
+
+        .hero-tag {
+          font-size: 0.7rem;
         }
 
         .stats-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(2, 1fr);
         }
 
         .stat-card {
-          padding: 2rem 1.5rem;
+          padding: 2.5rem 1.5rem;
+        }
+
+        .stat-number {
+          font-size: 2.5rem;
         }
 
         .hobby-card {
           padding: 2rem;
         }
 
-        .media-gallery {
-          grid-template-columns: repeat(2, 1fr);
+        .nav-line {
+          right: 1rem;
+          gap: 1rem;
+        }
+
+        .nav-dot {
+          width: 5px;
+          height: 5px;
+        }
+
+        .section-heading {
+          font-size: 2rem;
+        }
+
+        .footer-inner {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+
+        .scroll-indicator {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-name {
+          font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 0.8rem;
+          letter-spacing: 0.2em;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hobby-card {
+          padding: 1.5rem;
+        }
+
+        .hobby-title {
+          font-size: 1.5rem;
+        }
+
+        .hobby-icon {
+          font-size: 2.5rem;
+          margin-bottom: 1.25rem;
+        }
+
+        .nav-line {
+          display: none;
         }
       }
     </style>
   </head>
   <body>
-    <div class="grid-bg"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
-    <nav class="nav-circle">
-      <div class="nav-dot active" data-section="0" data-label="首页"></div>
-      <div class="nav-dot" data-section="1" data-label="关于"></div>
-      <div class="nav-dot" data-section="2" data-label="数据"></div>
-      <div class="nav-dot" data-section="3" data-label="爱好"></div>
-      <div class="nav-dot" data-section="4" data-label="留言"></div>
-      <div class="nav-dot" data-section="5" data-label="联系"></div>
+    <nav class="nav-line">
+      <div class="nav-dot active" data-section="0">
+        <span class="nav-label">首页</span>
+      </div>
+      <div class="nav-dot" data-section="1">
+        <span class="nav-label">关于</span>
+      </div>
+      <div class="nav-dot" data-section="2">
+        <span class="nav-label">数据</span>
+      </div>
+      <div class="nav-dot" data-section="3">
+        <span class="nav-label">爱好</span>
+      </div>
+      <div class="nav-dot" data-section="4">
+        <span class="nav-label">联系</span>
+      </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="section" data-index="0">
-      <div class="hero-core">
-        <div class="core-ring core-ring-1"></div>
-        <div class="core-ring core-ring-2"></div>
-        <div class="core-ring core-ring-3"></div>
-        <div class="core-center">
+    <section class="section hero" data-index="0">
+      <div class="container">
+        <div class="hero-inner">
           <h1 class="hero-name">任年友</h1>
           <p class="hero-subtitle">Digital Universe Explorer</p>
+          <div class="hero-line"></div>
           <div class="hero-tags">
-            <span class="hero-tag">💪 健身爱好者</span>
-            <span class="hero-tag">🎹 钢琴新人</span>
-            <span class="hero-tag">😄 幽默担当</span>
-            <span class="hero-tag">✨ 数字游民</span>
+            <span class="hero-tag">健身爱好者</span>
+            <span class="hero-tag">钢琴新人</span>
+            <span class="hero-tag">幽默担当</span>
+            <span class="hero-tag">数字游民</span>
           </div>
         </div>
-      </div>
-      <div class="scroll-hint">
-        <span>探索</span>
-        <div class="scroll-line"></div>
+        <div class="scroll-indicator">
+          <div class="scroll-line"></div>
+          <span>滚动探索</span>
+        </div>
       </div>
     </section>
 
     <!-- About Section -->
     <section class="section" data-index="1">
-      <div class="about-container">
-        <div class="data-flow"></div>
-        <div class="about-content">
-          <h2 class="section-title">// 关于我</h2>
+      <div class="container">
+        <div class="about-inner fade-in">
+          <div>
+            <p class="section-label">关于</p>
+            <h2 class="section-heading">我是谁</h2>
+          </div>
           <div class="about-text">
             <p>
-              欢迎来到我的个人介绍网站！我是任年友，一个在现实与虚拟之间穿梭的普通人。
+              欢迎来到我的个人空间。我是任年友，一个在现实与虚拟之间穿梭的普通人。
             </p>
             <p>
               健身是我与身体对话的方式，每一次举铁都是对极限的挑战，每一滴汗水都是成长的印记。
@@ -1066,42 +761,52 @@
 
     <!-- Stats Section -->
     <section class="section" data-index="2">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">∞</div>
-          <div class="stat-label">热情指数</div>
+      <div class="container">
+        <div class="fade-in" style="margin-bottom: 3rem">
+          <p class="section-label">数据</p>
+          <h2 class="section-heading">数字里的我</h2>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">正能量</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">MAX</div>
-          <div class="stat-label">幽默感</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">3</div>
-          <div class="stat-label">周健身</div>
+        <div class="stats-grid fade-in">
+          <div class="stat-card">
+            <div class="stat-number">&infin;</div>
+            <div class="stat-label">热情指数</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">正能量</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">MAX</div>
+            <div class="stat-label">幽默感</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">周健身</div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Hobbies Section -->
     <section class="section" data-index="3">
-      <div class="hobbies-container">
-        <div class="hobby-card">
-          <span class="hobby-icon">🏋️</span>
-          <h3 class="hobby-title">健身爱好者</h3>
-          <p class="hobby-desc">
-            在健身房这个战场，我与自己较量。每一次突破极限，都是对自我的超越。
-            力量、耐力、意志，在这里融为一体。
-          </p>
-          <div class="hobby-tags">
-            <span class="hobby-tag">力量训练</span>
-            <span class="hobby-tag">有氧运动</span>
-            <span class="hobby-tag">自律</span>
-          </div>
-          <div class="media-container">
+      <div class="container">
+        <div class="fade-in" style="margin-bottom: 3rem">
+          <p class="section-label">爱好</p>
+          <h2 class="section-heading">我所热爱</h2>
+        </div>
+        <div class="hobbies-grid fade-in">
+          <div class="hobby-card">
+            <span class="hobby-icon">&#x1F3CB;</span>
+            <h3 class="hobby-title">健身爱好者</h3>
+            <p class="hobby-desc">
+              在健身房这个战场，我与自己较量。每一次突破极限，都是对自我的超越。
+              力量、耐力、意志，在这里融为一体。
+            </p>
+            <div class="hobby-tags">
+              <span class="hobby-tag">力量训练</span>
+              <span class="hobby-tag">有氧运动</span>
+              <span class="hobby-tag">自律</span>
+            </div>
             <div class="image-slider">
               <div class="image-track" id="imageTrack">
                 <div class="image-slide">
@@ -1121,23 +826,21 @@
               <div class="image-dot" onclick="goToImage(2)"></div>
             </div>
           </div>
-        </div>
-        <div class="hobby-card">
-          <span class="hobby-icon">🎹</span>
-          <h3 class="hobby-title">钢琴新人</h3>
-          <p class="hobby-desc">
-            指尖在黑白键上起舞，音符在空中编织成梦。
-            每一首曲子都是一次心灵的旅行。
-          </p>
-          <div class="hobby-tags">
-            <span class="hobby-tag">新人</span>
-            <span class="hobby-tag">会一点点</span>
-            <span class="hobby-tag">弹的不好别喷哦，嘿嘿</span>
-          </div>
-          <div class="video-container">
+          <div class="hobby-card">
+            <span class="hobby-icon">&#x1F3B9;</span>
+            <h3 class="hobby-title">钢琴新人</h3>
+            <p class="hobby-desc">
+              指尖在黑白键上起舞，音符在空中编织成梦。
+              每一首曲子都是一次心灵的旅行。
+            </p>
+            <div class="hobby-tags">
+              <span class="hobby-tag">新人</span>
+              <span class="hobby-tag">会一点点</span>
+              <span class="hobby-tag">弹得不好别喷哦</span>
+            </div>
             <div class="video-gallery">
               <button class="video-arrow prev" onclick="changeVideo(-1)">
-                ‹
+                &#8249;
               </button>
               <div class="video-track" id="videoTrack">
                 <div class="video-wrapper">
@@ -1149,7 +852,6 @@
                       height="auto"
                     >
                       <source src="assets/piano.mp4" type="video/mp4" />
-                      您的浏览器不支持视频播放。
                     </video>
                   </div>
                 </div>
@@ -1162,7 +864,6 @@
                       height="auto"
                     >
                       <source src="assets/video1.mp4" type="video/mp4" />
-                      您的浏览器不支持视频播放。
                     </video>
                   </div>
                 </div>
@@ -1175,7 +876,6 @@
                       height="auto"
                     >
                       <source src="assets/video2.mp4" type="video/mp4" />
-                      您的浏览器不支持视频播放。
                     </video>
                   </div>
                 </div>
@@ -1188,13 +888,12 @@
                       height="auto"
                     >
                       <source src="assets/video3.mp4" type="video/mp4" />
-                      您的浏览器不支持视频播放。
                     </video>
                   </div>
                 </div>
               </div>
               <button class="video-arrow next" onclick="changeVideo(1)">
-                ›
+                &#8250;
               </button>
             </div>
             <div class="video-nav" id="videoNav">
@@ -1208,80 +907,43 @@
       </div>
     </section>
 
-    <!-- Comments Section -->
-    <section class="section" data-index="4">
-      <div class="about-container">
-        <div class="about-content">
-          <h2 class="section-title">💬 留言板</h2>
-          <div class="comments-section">
-            <div class="comment-form">
-              <input
-                type="text"
-                id="authorInput"
-                class="comment-input"
-                placeholder="你的昵称"
-                maxlength="20"
-              />
-              <input
-                type="text"
-                id="commentInput"
-                class="comment-input"
-                placeholder="写下你的评论..."
-                maxlength="200"
-              />
-              <button class="comment-button" onclick="addComment()">
-                发送
-              </button>
-            </div>
-            <div class="comments-list" id="commentsList">
-              <div class="no-comments">还没有评论，来做第一个留言的人吧！</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Contact Section -->
-    <section class="section" data-index="5">
-      <div class="terminal" style="--neon-green: #00ff80">
-        <div class="terminal-header">
-          <div class="terminal-btn red"></div>
-          <div class="terminal-btn yellow"></div>
-          <div class="terminal-btn green"></div>
-          <span class="terminal-title">contact@rennianyou — zsh</span>
-        </div>
-        <div class="terminal-body">
-          <div class="terminal-line">
-            <span class="terminal-prompt">➜</span>
-            <span class="terminal-text"
-              >欢迎来到我的网站末尾！请选择联系方式：</span
-            >
-          </div>
-          <div class="terminal-line">
-            <span class="terminal-prompt">➜</span>
-            <span class="terminal-text">
-              <br />QQ:
-              <a href="tencent://message/?uin=2493580059">2493580059</a>
-              <br />微信: w1234w3w <br />电话:
-              <a href="tel:18319191164">18319191164</a>
-            </span>
-          </div>
-          <div class="terminal-line">
-            <span class="terminal-prompt">➜</span>
-            <span class="terminal-text"
-              >期待与你连接...<span class="cursor-blink"></span
-            ></span>
+    <section class="section" data-index="4">
+      <div class="container">
+        <div class="contact-inner fade-in">
+          <p class="section-label">联系</p>
+          <h2 class="section-heading" style="margin-bottom: 2rem">找到我</h2>
+          <p class="contact-text">
+            欢迎来到我的网站末尾，请选择你喜欢的联系方式。
+          </p>
+          <div class="contact-links">
+            <a href="tencent://message/?uin=2493580059" class="contact-link">
+              <span class="contact-link-label">QQ</span>
+              <span class="contact-link-value">2493580059</span>
+            </a>
+            <div class="contact-link">
+              <span class="contact-link-label">微信</span>
+              <span class="contact-link-value">w1234w3w</span>
+            </div>
+            <a href="tel:18319191164" class="contact-link">
+              <span class="contact-link-label">电话</span>
+              <span class="contact-link-value">18319191164</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <footer>
-      <p>Designed & Built by <span>任年友</span> © 2026</p>
+      <div class="container">
+        <div class="footer-inner">
+          <span>任年友</span>
+          <span>&copy; 2026</span>
+        </div>
+      </div>
     </footer>
 
     <script>
-      // Navigation
       const sections = document.querySelectorAll(".section");
       const navDots = document.querySelectorAll(".nav-dot");
 
@@ -1291,7 +953,6 @@
         });
       });
 
-      // Intersection Observer for nav dots
       const observerOptions = {
         root: null,
         rootMargin: "0px",
@@ -1311,19 +972,20 @@
 
       sections.forEach((section) => observer.observe(section));
 
-      // Parallax effect for orbs
-      document.addEventListener("mousemove", (e) => {
-        const orbs = document.querySelectorAll(".orb");
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
+      const fadeEls = document.querySelectorAll(".fade-in");
+      const fadeObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
 
-        orbs.forEach((orb, index) => {
-          const speed = (index + 1) * 20;
-          orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-        });
-      });
+      fadeEls.forEach((el) => fadeObserver.observe(el));
 
-      // Image Slider
       let currentImage = 0;
       const totalImages = 3;
       const imageTrack = document.getElementById("imageTrack");
@@ -1332,11 +994,7 @@
 
       function goToImage(index) {
         currentImage = index;
-
-        // Update track position
-        imageTrack.style.transform = `translateX(-${currentImage * 100}%)`;
-
-        // Update dots
+        imageTrack.style.transform = "translateX(-" + currentImage * 100 + "%)";
         imageDots.forEach((dot, i) => {
           dot.classList.toggle("active", i === currentImage);
         });
@@ -1351,22 +1009,19 @@
       }
 
       function startAutoPlay() {
-        imageInterval = setInterval(nextImage, 3000);
+        imageInterval = setInterval(nextImage, 4000);
       }
 
       function stopAutoPlay() {
         clearInterval(imageInterval);
       }
 
-      // Start auto play
       startAutoPlay();
 
-      // Pause on hover, resume on leave
       const imageSlider = document.querySelector(".image-slider");
       imageSlider.addEventListener("mouseenter", stopAutoPlay);
       imageSlider.addEventListener("mouseleave", startAutoPlay);
 
-      // Video Gallery
       let currentVideo = 0;
       const totalVideos = 4;
       const videoTrack = document.getElementById("videoTrack");
@@ -1374,28 +1029,20 @@
 
       function changeVideo(direction) {
         currentVideo += direction;
-
         if (currentVideo >= totalVideos) {
           currentVideo = 0;
         } else if (currentVideo < 0) {
           currentVideo = totalVideos - 1;
         }
-
         goToVideo(currentVideo);
       }
 
       function goToVideo(index) {
         currentVideo = index;
-
-        // Update track position
-        videoTrack.style.transform = `translateX(-${currentVideo * 100}%)`;
-
-        // Update dots
+        videoTrack.style.transform = "translateX(-" + currentVideo * 100 + "%)";
         videoDots.forEach((dot, i) => {
           dot.classList.toggle("active", i === currentVideo);
         });
-
-        // Pause all videos except current one
         const allVideos = document.querySelectorAll(
           ".video-wrapper-inner video",
         );
@@ -1406,7 +1053,6 @@
         });
       }
 
-      // Touch/swipe support
       let startX = 0;
       let endX = 0;
       const videoGallery = document.querySelector(".video-gallery");
@@ -1421,7 +1067,7 @@
       });
 
       function handleSwipe() {
-        const diff = startX - endX;
+        var diff = startX - endX;
         if (Math.abs(diff) > 50) {
           if (diff > 0) {
             changeVideo(1);
@@ -1430,102 +1076,6 @@
           }
         }
       }
-
-      // Comments System
-      const API_URL = "/api/comments";
-
-      function escapeHtml(text) {
-        const div = document.createElement("div");
-        div.textContent = text;
-        return div.innerHTML;
-      }
-
-      function formatTime(timeStr) {
-        const date = new Date(timeStr);
-        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
-      }
-
-      async function loadComments() {
-        const commentsList = document.getElementById("commentsList");
-
-        try {
-          const response = await fetch(API_URL);
-          const comments = await response.json();
-
-          if (comments.length === 0) {
-            commentsList.innerHTML =
-              '<div class="no-comments">还没有评论，来做第一个留言的人吧！</div>';
-            return;
-          }
-
-          commentsList.innerHTML = comments
-            .map(
-              (comment) => `
-          <div class="comment-item">
-            <div class="comment-header">
-              <span class="comment-author">${escapeHtml(comment.author)}</span>
-              <span class="comment-time">${formatTime(comment.created_at)}</span>
-            </div>
-            <div class="comment-text">${escapeHtml(comment.text)}</div>
-          </div>
-        `,
-            )
-            .join("");
-        } catch (error) {
-          commentsList.innerHTML =
-            '<div class="no-comments">无法加载评论，请稍后再试</div>';
-          console.error("加载评论出错:", error);
-        }
-      }
-
-      async function addComment() {
-        const authorInput = document.getElementById("authorInput");
-        const commentInput = document.getElementById("commentInput");
-
-        const author = authorInput.value.trim();
-        const text = commentInput.value.trim();
-
-        if (!text) {
-          alert("请输入评论内容！");
-          return;
-        }
-
-        try {
-          const response = await fetch(API_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              author: author,
-              text: text,
-            }),
-          });
-
-          if (response.ok) {
-            authorInput.value = "";
-            commentInput.value = "";
-            loadComments();
-          } else {
-            alert("发送评论失败，请重试");
-          }
-        } catch (error) {
-          alert("发送评论失败，请检查网络连接");
-          console.error("发送评论出错:", error);
-        }
-      }
-
-      // Allow Enter key to send comment
-      document
-        .getElementById("commentInput")
-        .addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            addComment();
-          }
-        });
-
-      // Load comments on page load
-      loadComments();
     </script>
   </body>
 </html>
