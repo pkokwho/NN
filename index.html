@@ -3,7 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="任年友的个人空间 — 健身爱好者、电子琴新人、网页设计师，一个在现实与数字之间游走的普通人。"
+    />
+    <meta property="og:title" content="任年友 — 个人空间" />
+    <meta
+      property="og:description"
+      content="健身爱好者、电子琴新人、网页设计师的个人主页。"
+    />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#f9f6f0" />
     <title>任年友 — 个人空间</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -951,6 +966,89 @@
         font-weight: 300;
       }
 
+      /* ===== BACK TO TOP ===== */
+      .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2.5rem;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--white);
+        border: 1px solid var(--border-soft);
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        cursor: pointer;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease,
+          box-shadow 0.4s ease;
+        font-family: "Inter", sans-serif;
+        line-height: 1;
+      }
+      .back-to-top.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .back-to-top:hover {
+        background: var(--text);
+        color: var(--white);
+        border-color: var(--text);
+        box-shadow: 0 2px 16px var(--shadow);
+        transform: translateY(-2px);
+      }
+
+      /* ===== MOBILE BOTTOM NAV ===== */
+      @media (max-width: 480px) {
+        .nav-line {
+          display: none;
+        }
+        .mobile-nav {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          padding: 0.6rem 0.5rem 0.8rem;
+          background: rgba(249, 246, 240, 0.92);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border-top: 1px solid var(--border-soft);
+          z-index: 999;
+        }
+        .mobile-nav-item {
+          font-family: "Inter", sans-serif;
+          font-size: 0.55rem;
+          font-weight: 400;
+          letter-spacing: 0.1em;
+          color: var(--text-muted);
+          cursor: pointer;
+          padding: 0.3rem 0.6rem;
+          border-radius: 12px;
+          transition: all 0.3s ease;
+          border: none;
+          background: none;
+          text-transform: uppercase;
+        }
+        .mobile-nav-item.active {
+          color: var(--accent-dark);
+        }
+        .back-to-top {
+          bottom: 4.5rem;
+          right: 1rem;
+          width: 34px;
+          height: 34px;
+        }
+      }
+
       /* ===== RESPONSIVE ===== */
       @media (max-width: 1024px) {
         .about-layout {
@@ -1067,37 +1165,64 @@
     </style>
   </head>
   <body>
-    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-    <div class="lightbox" id="lightbox">
-      <button class="lightbox-close" id="lightboxClose">&times;</button>
-      <button class="lightbox-nav prev" id="lightboxPrev">&#8249;</button>
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" id="lightboxClose" aria-label="关闭">
+        &times;
+      </button>
+      <button class="lightbox-nav prev" id="lightboxPrev" aria-label="上一张">
+        &#8249;
+      </button>
       <img src="" alt="" id="lightboxImg" />
-      <button class="lightbox-nav next" id="lightboxNext">&#8250;</button>
-      <div class="lightbox-counter" id="lightboxCounter"></div>
+      <button class="lightbox-nav next" id="lightboxNext" aria-label="下一张">
+        &#8250;
+      </button>
+      <div
+        class="lightbox-counter"
+        id="lightboxCounter"
+        aria-live="polite"
+      ></div>
     </div>
 
-    <nav class="nav-line">
-      <div class="nav-dot-wrap" data-section="0">
+    <nav class="nav-line" aria-label="页面导航">
+      <div class="nav-dot-wrap" data-section="0" aria-label="首页">
         <div class="nav-dot active"></div>
         <span class="nav-label">首页</span>
       </div>
-      <div class="nav-dot-wrap" data-section="1">
+      <div class="nav-dot-wrap" data-section="1" aria-label="关于">
         <div class="nav-dot"></div>
         <span class="nav-label">关于</span>
       </div>
-      <div class="nav-dot-wrap" data-section="2">
+      <div class="nav-dot-wrap" data-section="2" aria-label="数据">
         <div class="nav-dot"></div>
         <span class="nav-label">数据</span>
       </div>
-      <div class="nav-dot-wrap" data-section="3">
+      <div class="nav-dot-wrap" data-section="3" aria-label="爱好">
         <div class="nav-dot"></div>
         <span class="nav-label">爱好</span>
       </div>
-      <div class="nav-dot-wrap" data-section="4">
+      <div class="nav-dot-wrap" data-section="4" aria-label="联系">
         <div class="nav-dot"></div>
         <span class="nav-label">联系</span>
       </div>
+    </nav>
+
+    <button class="back-to-top" id="backToTop" aria-label="返回顶部">
+      &uarr;
+    </button>
+
+    <nav
+      class="mobile-nav"
+      id="mobileNav"
+      aria-label="移动端导航"
+      style="display: none"
+    >
+      <button class="mobile-nav-item active" data-section="0">首页</button>
+      <button class="mobile-nav-item" data-section="1">关于</button>
+      <button class="mobile-nav-item" data-section="2">数据</button>
+      <button class="mobile-nav-item" data-section="3">爱好</button>
+      <button class="mobile-nav-item" data-section="4">联系</button>
     </nav>
 
     <!-- ===== HERO ===== -->
@@ -1116,9 +1241,9 @@
           </div>
           <div class="hero-tags">
             <span class="hero-tag">健身爱好者</span>
-            <span class="hero-tag">钢琴新人</span>
-            <span class="hero-tag">幽默担当</span>
-            <span class="hero-tag">数字游民</span>
+            <span class="hero-tag">电子琴</span>
+            <span class="hero-tag">网页设计</span>
+            <span class="hero-tag">设计师</span>
           </div>
         </div>
         <div class="scroll-indicator">
@@ -1208,21 +1333,30 @@
                   <img
                     src="assets/fitness.jpg"
                     alt="健身照片1"
+                    loading="lazy"
                     data-index="0"
+                    width="800"
+                    height="600"
                   />
                 </div>
                 <div class="image-slide">
                   <img
                     src="assets/fitness2.jpg"
                     alt="健身照片2"
+                    loading="lazy"
                     data-index="1"
+                    width="800"
+                    height="600"
                   />
                 </div>
                 <div class="image-slide">
                   <img
                     src="assets/fitness3.jpg"
                     alt="健身照片3"
+                    loading="lazy"
                     data-index="2"
+                    width="800"
+                    height="600"
                   />
                 </div>
               </div>
@@ -1257,6 +1391,7 @@
                     <video
                       controls
                       preload="metadata"
+                      playsinline
                       width="100%"
                       height="auto"
                     >
@@ -1268,7 +1403,8 @@
                   <div class="video-wrapper-inner">
                     <video
                       controls
-                      preload="metadata"
+                      preload="none"
+                      playsinline
                       width="100%"
                       height="auto"
                     >
@@ -1280,7 +1416,8 @@
                   <div class="video-wrapper-inner">
                     <video
                       controls
-                      preload="metadata"
+                      preload="none"
+                      playsinline
                       width="100%"
                       height="auto"
                     >
@@ -1292,7 +1429,8 @@
                   <div class="video-wrapper-inner">
                     <video
                       controls
-                      preload="metadata"
+                      preload="none"
+                      playsinline
                       width="100%"
                       height="auto"
                     >
@@ -1373,13 +1511,24 @@
 
     <script>
       (function () {
-        // Scroll Progress
+        // Scroll Progress + Back to Top
         var sp = document.getElementById("scrollProgress");
-        window.addEventListener("scroll", function () {
-          var st = window.pageYOffset || document.documentElement.scrollTop;
-          var sh = document.documentElement.scrollHeight - window.innerHeight;
-          sp.style.width = (st / sh) * 100 + "%";
-        });
+        var btt = document.getElementById("backToTop");
+        window.addEventListener(
+          "scroll",
+          function () {
+            var st = window.pageYOffset || document.documentElement.scrollTop;
+            var sh = document.documentElement.scrollHeight - window.innerHeight;
+            sp.style.width = (st / sh) * 100 + "%";
+            if (btt) btt.classList.toggle("visible", st > 400);
+          },
+          { passive: true },
+        );
+        if (btt) {
+          btt.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        }
 
         // Nav dots
         var sections = document.querySelectorAll(".section");
@@ -1407,6 +1556,36 @@
         );
         sections.forEach(function (s) {
           secObs.observe(s);
+        });
+
+        // Mobile nav
+        var mNav = document.getElementById("mobileNav");
+        var mItems = document.querySelectorAll(".mobile-nav-item");
+        if (mNav && window.innerWidth <= 480) mNav.style.display = "flex";
+        window.addEventListener("resize", function () {
+          if (mNav)
+            mNav.style.display = window.innerWidth <= 480 ? "flex" : "none";
+        });
+        mItems.forEach(function (mi, i) {
+          mi.addEventListener("click", function () {
+            sections[i].scrollIntoView({ behavior: "smooth" });
+          });
+        });
+        var mNavObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                var idx = parseInt(e.target.dataset.index);
+                mItems.forEach(function (mi, i) {
+                  mi.classList.toggle("active", i === idx);
+                });
+              }
+            });
+          },
+          { threshold: 0.4 },
+        );
+        sections.forEach(function (s) {
+          mNavObs.observe(s);
         });
 
         // Reveal animations
@@ -1602,11 +1781,15 @@
         // Contact toggle
         var toggles = document.querySelectorAll(".contact-toggle");
         toggles.forEach(function (t) {
+          var followHandler = null;
           t.addEventListener("click", function (e) {
             e.preventDefault();
+            e.stopPropagation();
             var isRevealed = t.classList.contains("revealed");
             toggles.forEach(function (ot) {
               ot.classList.remove("revealed");
+              ot.querySelector(".contact-link-value").textContent = "点击查看";
+              ot.style.cursor = "pointer";
             });
             if (!isRevealed) {
               t.classList.add("revealed");
@@ -1614,17 +1797,18 @@
               t.querySelector(".contact-link-value").textContent = val;
               var href = t.getAttribute("data-href");
               if (href) {
-                t.style.cursor = "pointer";
-                t.addEventListener(
-                  "click",
-                  function follow() {
-                    window.location.href = href;
-                  },
-                  { once: true },
-                );
+                t.style.cursor = "alias";
+                followHandler = function follow(ev) {
+                  ev.stopPropagation();
+                  window.open(href, "_self");
+                };
+                t.addEventListener("click", followHandler);
               }
             } else {
-              t.querySelector(".contact-link-value").textContent = "点击查看";
+              if (followHandler) {
+                t.removeEventListener("click", followHandler);
+                followHandler = null;
+              }
             }
           });
 
