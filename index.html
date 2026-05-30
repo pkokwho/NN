@@ -2171,8 +2171,10 @@
         function detectApiBase() {
           var host = window.location.hostname;
           var port = window.location.port;
-          if (port === "3000" || (host === "localhost" && !port)) return "";
-          return "http://" + host + ":3000";
+          if (port === "3000") return "";
+          if (host === "localhost" || host === "127.0.0.1")
+            return "http://" + host + ":3000";
+          return "";
         }
 
         function openChat() {
