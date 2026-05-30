@@ -875,8 +875,37 @@
       .contact-link-value {
         font-size: 0.9rem;
         font-weight: 350;
-        color: var(--text);
+        color: var(--text-muted);
         letter-spacing: 0.02em;
+        transition: color 0.4s ease;
+        min-width: 80px;
+      }
+      .contact-toggle.revealed .contact-link-value {
+        color: var(--text);
+      }
+      .contact-link-icon {
+        font-size: 0.55rem;
+        color: var(--text-muted);
+        transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+        margin-left: auto;
+      }
+      .contact-toggle.revealed .contact-link-icon {
+        transform: rotate(180deg);
+      }
+      .contact-link-hint {
+        font-family: "Inter", sans-serif;
+        font-size: 0.55rem;
+        color: var(--accent-dark);
+        opacity: 0;
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+      .contact-toggle.revealed .contact-link-hint {
+        opacity: 0;
       }
       .contact-message {
         font-family: "Cormorant Garamond", serif;
@@ -1301,18 +1330,29 @@
           </div>
           <div class="reveal reveal-d2">
             <div class="contact-links">
-              <a href="tencent://message/?uin=2493580059" class="contact-link">
+              <div
+                class="contact-link contact-toggle"
+                data-value="2493580059"
+                data-href="tencent://message/?uin=2493580059"
+              >
                 <span class="contact-link-label">QQ</span>
-                <span class="contact-link-value">2493580059</span>
-              </a>
-              <div class="contact-link" id="wechatLink">
-                <span class="contact-link-label">微信</span>
-                <span class="contact-link-value">w1234w3w</span>
+                <span class="contact-link-value">点击查看</span>
+                <span class="contact-link-icon">&#x25BC;</span>
               </div>
-              <a href="tel:18319191164" class="contact-link">
+              <div class="contact-link contact-toggle" data-value="w1234w3w">
+                <span class="contact-link-label">微信</span>
+                <span class="contact-link-value">点击查看</span>
+                <span class="contact-link-icon">&#x25BC;</span>
+              </div>
+              <div
+                class="contact-link contact-toggle"
+                data-value="18319191164"
+                data-href="tel:18319191164"
+              >
                 <span class="contact-link-label">电话</span>
-                <span class="contact-link-value">18319191164</span>
-              </a>
+                <span class="contact-link-value">点击查看</span>
+                <span class="contact-link-icon">&#x25BC;</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1559,21 +1599,48 @@
           }
         });
 
-        // Contact magnetic
-        document.querySelectorAll(".contact-link").forEach(function (lk) {
-          lk.addEventListener("mousemove", function (e) {
-            var r = lk.getBoundingClientRect();
+        // Contact toggle
+        var toggles = document.querySelectorAll(".contact-toggle");
+        toggles.forEach(function (t) {
+          t.addEventListener("click", function (e) {
+            e.preventDefault();
+            var isRevealed = t.classList.contains("revealed");
+            toggles.forEach(function (ot) {
+              ot.classList.remove("revealed");
+            });
+            if (!isRevealed) {
+              t.classList.add("revealed");
+              var val = t.getAttribute("data-value");
+              t.querySelector(".contact-link-value").textContent = val;
+              var href = t.getAttribute("data-href");
+              if (href) {
+                t.style.cursor = "pointer";
+                t.addEventListener(
+                  "click",
+                  function follow() {
+                    window.location.href = href;
+                  },
+                  { once: true },
+                );
+              }
+            } else {
+              t.querySelector(".contact-link-value").textContent = "点击查看";
+            }
+          });
+
+          t.addEventListener("mousemove", function (e) {
+            var r = t.getBoundingClientRect();
             var x = e.clientX - r.left - r.width / 2;
             var y = e.clientY - r.top - r.height / 2;
-            var v = lk.querySelector(".contact-link-value");
+            var v = t.querySelector(".contact-link-value");
             if (v) {
               v.style.transform =
                 "translate(" + x * 0.06 + "px," + y * 0.06 + "px)";
               v.style.transition = "transform 0.12s ease-out";
             }
           });
-          lk.addEventListener("mouseleave", function () {
-            var v = lk.querySelector(".contact-link-value");
+          t.addEventListener("mouseleave", function () {
+            var v = t.querySelector(".contact-link-value");
             if (v) {
               v.style.transform = "translate(0,0)";
               v.style.transition = "transform 0.4s ease";
