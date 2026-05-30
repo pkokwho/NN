@@ -2329,7 +2329,7 @@
               lastErr = data.error || "服务器返回错误";
             } catch (err) {
               lastErr =
-                err.name === "TimeoutError" ? "请求超时" : "后端服务未连接";
+                "AI 服务连接失败，可能是当前网络无法访问 AI 后端，请使用vpn或切换网络。";
               if (attempt < MAX_RETRY)
                 await new Promise(function (r) {
                   setTimeout(r, RETRY_DELAY);
