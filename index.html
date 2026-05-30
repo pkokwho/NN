@@ -2164,28 +2164,16 @@
         var chatHeaderDot = document.querySelector(".chat-header-dot");
         var isChatOpen = false;
         var isChatLoading = false;
-        var chatApiBase = "";
         var MAX_RETRY = 3;
         var RETRY_DELAY = 1500;
-
-        function detectApiBase() {
-          var host = window.location.hostname;
-          var port = window.location.port;
-          if (port === "3000") return "";
-          if (host === "localhost" || host === "127.0.0.1")
-            return "http://" + host + ":3000";
-          return "";
-        }
+        var CHAT_API = "https://nn-production-7f70.up.railway.app";
 
         function openChat() {
           isChatOpen = true;
           chatPanel.classList.add("open");
           chatToggle.classList.remove("has-unread");
           scrollChatBody();
-          if (!chatApiBase) {
-            chatApiBase = detectApiBase();
-            runHealthCheck();
-          }
+          runHealthCheck();
         }
         function closeChat() {
           isChatOpen = false;
@@ -2233,7 +2221,7 @@
 
         async function runHealthCheck() {
           try {
-            var r = await fetch(chatApiBase + "/api/health", {
+            var r = await fetch(CHAT_API + "/api/health", {
               signal: AbortSignal.timeout(5000),
             });
             setConnectionStatus(r.ok);
@@ -2256,7 +2244,7 @@
             {
               label: "后端服务连接",
               fn: async function () {
-                var r = await fetch(chatApiBase + "/api/health", {
+                var r = await fetch(CHAT_API + "/api/health", {
                   signal: AbortSignal.timeout(5000),
                 });
                 return r.ok;
@@ -2265,7 +2253,7 @@
             {
               label: "AI API 可达",
               fn: async function () {
-                var r = await fetch(chatApiBase + "/api/chat", {
+                var r = await fetch(CHAT_API + "/api/chat", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({ message: "ping" }),
@@ -2310,13 +2298,12 @@
           chatInput.value = "";
           addMessage("user", text);
           showTyping();
-          if (!chatApiBase) chatApiBase = detectApiBase();
 
           var ok = false;
           var lastErr = "";
           for (var attempt = 0; attempt <= MAX_RETRY; attempt++) {
             try {
-              var resp = await fetch(chatApiBase + "/api/chat", {
+              var resp = await fetch(CHAT_API + "/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: text }),
@@ -2383,7 +2370,7 @@
           });
           removeTyping();
           addMessage("assistant", "聊天记录已清空，有什么想聊的？😊");
-          fetch(chatApiBase + "/api/chat/history", { method: "DELETE" }).catch(
+          fetch(CHAT_API + "/api/chat/history", { method: "DELETE" }).catch(
             function () {},
           );
         });
@@ -2391,7 +2378,6 @@
           if (isChatOpen && !chatWidget.contains(e.target)) closeChat();
         });
 
-        chatApiBase = detectApiBase();
         runHealthCheck();
       })();
     </script>
