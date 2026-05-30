@@ -1,0 +1,7 @@
+name = "nn-chat"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+AI_CHAT_API_URL = "https://api.deepseek.com/chat/completions"
+AI_CHAT_MODEL = "deepseek-chat"

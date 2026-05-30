@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const path = require("path");
+const rateLimit = require("express-rate-limit");
 const aiChat = require("./services/aiChat");
 
 const PORT = parseInt(process.env.PORT || process.env.AI_CHAT_PORT || "3000", 10);
@@ -35,23 +36,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-// ── 简易频率限制 ──
-var requestCounts = {};
-var RATE_LIMIT_WINDOW = 60000; // 1 分钟
-var RATE_LIMIT_MAX = 20;
-
-app.use("/api/chat", function (req, res, next) {
-  var ip = req.ip || req.connection.remoteAddress || "unknown";
-  var now = Date.now();
-  if (!requestCounts[ip]) requestCounts[ip] = { count: 0, reset: now + RATE_LIMIT_WINDOW };
-  if (now > requestCounts[ip].reset) {
-    requestCounts[ip] = { count: 0, reset: now + RATE_LIMIT_WINDOW };
-  }
-  requestCounts[ip].count++;
-  if (requestCounts[ip].count > RATE_LIMIT_MAX) {
-    return res.status(429).json({ error: "请求过于频繁，请稍后再试" });
-  }
-  next();
+// ── 速率限制：每个 IP 每分钟最多 5 次 ──
+const chatLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 5,
+  message: { error: "每分钟我们只能交谈5次哦~" },
+  standardHeaders: true,
+  legacyHeaders: false,
 });
 
 // ── 静态文件 ──
@@ -63,9 +54,17 @@ app.use(express.static(__dirname));
  * Body: { "message": "你好" }
  * 返回: { "reply": "AI的回复", "historyLength": 对话轮次 }
  */
-app.post("/api/chat", async function (req, res) {
+app.post("/api/chat", chatLimiter, async function (req, res) {
   try {
     var message = req.body.message;
+
+    if (!message || typeof message !== "string") {
+      return res.status(400).json({ error: "请提供有效的消息内容" });
+    }
+    if (message.length > 300) {
+      return res.status(400).json({ error: "消息内容不能超过300字哦~" });
+    }
+
     var result = await aiChat.sendMessage(message);
     res.json({ reply: result.reply, historyLength: result.historyLength });
   } catch (err) {
