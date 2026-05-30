@@ -930,6 +930,274 @@
         margin-top: 2rem;
       }
 
+      /* ===== AI CHAT WIDGET ===== */
+      .chat-widget {
+        position: fixed;
+        bottom: 2rem;
+        right: 2.5rem;
+        z-index: 998;
+        font-family: "Inter", "Noto Serif SC", sans-serif;
+      }
+      .chat-toggle {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--white);
+        border: 1px solid var(--border-soft);
+        color: var(--text);
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 1px 6px var(--shadow);
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      .chat-toggle:hover {
+        background: var(--text);
+        color: var(--white);
+        border-color: var(--text);
+        box-shadow: 0 2px 16px var(--shadow);
+      }
+      .chat-toggle.has-unread::after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent-dark);
+      }
+      .chat-panel {
+        position: absolute;
+        bottom: 56px;
+        right: 0;
+        width: 340px;
+        max-height: 480px;
+        background: var(--white);
+        border: 1px solid var(--border-soft);
+        border-radius: 12px;
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+        pointer-events: none;
+        transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .chat-panel.open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+      .chat-header {
+        padding: 0.8rem 1rem;
+        border-bottom: 1px solid var(--border-soft);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+      .chat-header-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .chat-header-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #4caf50;
+      }
+      .chat-header-actions {
+        display: flex;
+        gap: 0.4rem;
+      }
+      .chat-header-btn {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        font-size: 0.75rem;
+        font-family: "Inter", sans-serif;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+      .chat-header-btn:hover {
+        color: var(--text);
+        background: rgba(0, 0, 0, 0.04);
+      }
+      .chat-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0.8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        min-height: 200px;
+        max-height: 320px;
+        scroll-behavior: smooth;
+      }
+      .chat-body::-webkit-scrollbar {
+        width: 4px;
+      }
+      .chat-body::-webkit-scrollbar-thumb {
+        background: var(--border-soft);
+        border-radius: 2px;
+      }
+      .chat-msg {
+        max-width: 85%;
+        padding: 0.6rem 0.8rem;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        line-height: 1.65;
+        animation: msgIn 0.3s ease;
+      }
+      @keyframes msgIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .chat-msg.user {
+        align-self: flex-end;
+        background: var(--text);
+        color: var(--white);
+        border-bottom-right-radius: 3px;
+      }
+      .chat-msg.assistant {
+        align-self: flex-start;
+        background: var(--bg);
+        color: var(--text);
+        border-bottom-left-radius: 3px;
+        border: 1px solid var(--border-soft);
+      }
+      .chat-msg.error {
+        align-self: center;
+        background: none;
+        color: #c0392b;
+        font-size: 0.7rem;
+        text-align: center;
+        max-width: 100%;
+      }
+      .chat-input-row {
+        padding: 0.6rem 0.8rem;
+        border-top: 1px solid var(--border-soft);
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+      .chat-input {
+        flex: 1;
+        border: 1px solid var(--border-soft);
+        border-radius: 8px;
+        padding: 0.5rem 0.7rem;
+        font-family: "Inter", "Noto Serif SC", sans-serif;
+        font-size: 0.78rem;
+        color: var(--text);
+        background: var(--bg);
+        outline: none;
+        transition: border-color 0.3s ease;
+        resize: none;
+      }
+      .chat-input:focus {
+        border-color: var(--accent-dark);
+      }
+      .chat-send {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: var(--text);
+        border: none;
+        color: var(--white);
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+      .chat-send:hover {
+        background: var(--accent-dark);
+      }
+      .chat-send:disabled {
+        background: var(--border-soft);
+        cursor: not-allowed;
+      }
+      .chat-typing {
+        align-self: flex-start;
+        display: flex;
+        gap: 4px;
+        padding: 0.6rem 0.8rem;
+      }
+      .chat-typing span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--text-muted);
+        animation: dotBounce 1.4s infinite ease-in-out;
+      }
+      .chat-typing span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .chat-typing span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      .chat-fix-btn {
+        align-self: center;
+        background: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: 20px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0.3rem 0;
+      }
+      .chat-fix-btn:hover {
+        background: #c0392b;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+      }
+      @keyframes dotBounce {
+        0%,
+        80%,
+        100% {
+          transform: scale(0.6);
+          opacity: 0.4;
+        }
+        40% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @media (max-width: 480px) {
+        .chat-panel {
+          width: calc(100vw - 2rem);
+          right: -0.5rem;
+          max-height: 420px;
+        }
+        .chat-widget {
+          bottom: 4.2rem;
+          right: 1rem;
+        }
+      }
+
       /* ===== FOOTER ===== */
       footer {
         padding: 3.5rem 0 2.5rem;
@@ -1509,6 +1777,58 @@
       </div>
     </footer>
 
+    <div class="chat-widget" id="chatWidget" aria-label="AI智能助手">
+      <button
+        class="chat-toggle"
+        id="chatToggle"
+        aria-label="打开AI助手"
+        title="AI智能助手"
+      >
+        &#x1F4AC;
+      </button>
+      <div class="chat-panel" id="chatPanel">
+        <div class="chat-header">
+          <span class="chat-header-title">
+            <span class="chat-header-dot"></span> AI 智能助手
+          </span>
+          <div class="chat-header-actions">
+            <button
+              class="chat-header-btn"
+              id="chatClear"
+              aria-label="清空聊天"
+            >
+              清空
+            </button>
+            <button
+              class="chat-header-btn"
+              id="chatClose"
+              aria-label="关闭助手"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <div class="chat-msg assistant">
+            你好！我是任年友的AI智能助手"小友"👋 有什么想了解的尽管问我~
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input
+            type="text"
+            class="chat-input"
+            id="chatInput"
+            placeholder="输入消息..."
+            autocomplete="off"
+            maxlength="2000"
+          />
+          <button class="chat-send" id="chatSend" aria-label="发送消息">
+            &rarr;
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
       (function () {
         // Scroll Progress + Back to Top
@@ -1831,6 +2151,246 @@
             }
           });
         });
+
+        // ── AI Chat Widget (v2) ──
+        var chatPanel = document.getElementById("chatPanel");
+        var chatToggle = document.getElementById("chatToggle");
+        var chatBody = document.getElementById("chatBody");
+        var chatInput = document.getElementById("chatInput");
+        var chatSend = document.getElementById("chatSend");
+        var chatClear = document.getElementById("chatClear");
+        var chatClose = document.getElementById("chatClose");
+        var chatWidget = document.getElementById("chatWidget");
+        var chatHeaderDot = document.querySelector(".chat-header-dot");
+        var isChatOpen = false;
+        var isChatLoading = false;
+        var chatApiBase = "";
+        var MAX_RETRY = 3;
+        var RETRY_DELAY = 1500;
+
+        function detectApiBase() {
+          var host = window.location.hostname;
+          var port = window.location.port;
+          if (port === "3000" || (host === "localhost" && !port)) return "";
+          return "http://" + host + ":3000";
+        }
+
+        function openChat() {
+          isChatOpen = true;
+          chatPanel.classList.add("open");
+          chatToggle.classList.remove("has-unread");
+          scrollChatBody();
+          if (!chatApiBase) {
+            chatApiBase = detectApiBase();
+            runHealthCheck();
+          }
+        }
+        function closeChat() {
+          isChatOpen = false;
+          chatPanel.classList.remove("open");
+        }
+        function scrollChatBody() {
+          setTimeout(function () {
+            chatBody.scrollTop = chatBody.scrollHeight;
+          }, 50);
+        }
+        function addMessage(role, text) {
+          var msg = document.createElement("div");
+          msg.className = "chat-msg " + role;
+          msg.textContent = text;
+          chatBody.appendChild(msg);
+          scrollChatBody();
+        }
+        function removeTyping() {
+          var t = chatBody.querySelector(".chat-typing");
+          if (t) t.remove();
+        }
+        function showTyping() {
+          removeTyping();
+          var typing = document.createElement("div");
+          typing.className = "chat-typing";
+          for (var i = 0; i < 3; i++) {
+            var d = document.createElement("span");
+            typing.appendChild(d);
+          }
+          chatBody.appendChild(typing);
+          scrollChatBody();
+        }
+        function addError(text) {
+          removeTyping();
+          var msg = document.createElement("div");
+          msg.className = "chat-msg error";
+          msg.textContent = text;
+          chatBody.appendChild(msg);
+          scrollChatBody();
+        }
+        function setConnectionStatus(ok) {
+          if (chatHeaderDot)
+            chatHeaderDot.style.background = ok ? "#4caf50" : "#e74c3c";
+        }
+
+        async function runHealthCheck() {
+          try {
+            var r = await fetch(chatApiBase + "/api/health", {
+              signal: AbortSignal.timeout(5000),
+            });
+            setConnectionStatus(r.ok);
+            return r.ok;
+          } catch (_) {
+            setConnectionStatus(false);
+            return false;
+          }
+        }
+
+        async function runDiagnostic() {
+          addMessage("assistant", "🔍 正在运行诊断...");
+          var checks = [
+            {
+              label: "浏览器在线",
+              fn: async function () {
+                return navigator.onLine;
+              },
+            },
+            {
+              label: "后端服务连接",
+              fn: async function () {
+                var r = await fetch(chatApiBase + "/api/health", {
+                  signal: AbortSignal.timeout(5000),
+                });
+                return r.ok;
+              },
+            },
+            {
+              label: "AI API 可达",
+              fn: async function () {
+                var r = await fetch(chatApiBase + "/api/chat", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ message: "ping" }),
+                  signal: AbortSignal.timeout(15000),
+                });
+                var d = await r.json();
+                return !!(d && d.reply);
+              },
+            },
+          ];
+          var allOk = true;
+          for (var i = 0; i < checks.length; i++) {
+            var ok = false;
+            try {
+              ok = await checks[i].fn();
+            } catch (_) {
+              ok = false;
+            }
+            addMessage("assistant", (ok ? "✅ " : "❌ ") + checks[i].label);
+            if (!ok) allOk = false;
+          }
+          if (allOk) {
+            addMessage(
+              "assistant",
+              "🎉 所有检查通过！AI 助手已就绪，可以开始聊天了。",
+            );
+          } else {
+            addMessage(
+              "assistant",
+              "💡 修复步骤:\n1. 检查网络连接是否正常\n2. 运行: cd d:\\html\\jj && node server.js\n3. 确保 .env 中 API 密钥正确\n4. 检查防火墙是否拦截端口 3000\n5. 刷新页面后重试",
+            );
+          }
+          setConnectionStatus(allOk);
+          return allOk;
+        }
+
+        async function sendChatMessage() {
+          var text = chatInput.value.trim();
+          if (!text || isChatLoading) return;
+          isChatLoading = true;
+          chatSend.disabled = true;
+          chatInput.value = "";
+          addMessage("user", text);
+          showTyping();
+          if (!chatApiBase) chatApiBase = detectApiBase();
+
+          var ok = false;
+          var lastErr = "";
+          for (var attempt = 0; attempt <= MAX_RETRY; attempt++) {
+            try {
+              var resp = await fetch(chatApiBase + "/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: text }),
+                signal: AbortSignal.timeout(30000),
+              });
+              var data = await resp.json();
+              if (resp.ok && data.reply) {
+                removeTyping();
+                addMessage("assistant", data.reply);
+                setConnectionStatus(true);
+                ok = true;
+                break;
+              }
+              lastErr = data.error || "服务器返回错误";
+            } catch (err) {
+              lastErr =
+                err.name === "TimeoutError" ? "请求超时" : "后端服务未连接";
+              if (attempt < MAX_RETRY)
+                await new Promise(function (r) {
+                  setTimeout(r, RETRY_DELAY);
+                });
+            }
+          }
+          if (!ok) {
+            removeTyping();
+            setConnectionStatus(false);
+            addError("❌ " + lastErr);
+            showFixButton();
+          }
+          isChatLoading = false;
+          chatSend.disabled = false;
+          chatInput.focus();
+        }
+
+        function showFixButton() {
+          var existing = chatBody.querySelector(".chat-fix-btn");
+          if (existing) return;
+          var btn = document.createElement("button");
+          btn.className = "chat-fix-btn";
+          btn.textContent = "🔧 一键诊断修复";
+          btn.addEventListener("click", function () {
+            btn.remove();
+            runDiagnostic();
+          });
+          chatBody.appendChild(btn);
+          scrollChatBody();
+        }
+
+        chatToggle.addEventListener("click", function () {
+          isChatOpen ? closeChat() : openChat();
+        });
+        chatClose.addEventListener("click", closeChat);
+        chatSend.addEventListener("click", sendChatMessage);
+        chatInput.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendChatMessage();
+          }
+        });
+        chatClear.addEventListener("click", function () {
+          var msgs = chatBody.querySelectorAll(".chat-msg,.chat-fix-btn");
+          msgs.forEach(function (m) {
+            m.remove();
+          });
+          removeTyping();
+          addMessage("assistant", "聊天记录已清空，有什么想聊的？😊");
+          fetch(chatApiBase + "/api/chat/history", { method: "DELETE" }).catch(
+            function () {},
+          );
+        });
+        document.addEventListener("click", function (e) {
+          if (isChatOpen && !chatWidget.contains(e.target)) closeChat();
+        });
+
+        chatApiBase = detectApiBase();
+        runHealthCheck();
       })();
     </script>
   </body>
