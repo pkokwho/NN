@@ -2197,6 +2197,7 @@
           msg.textContent = text;
           chatBody.appendChild(msg);
           scrollChatBody();
+          saveHistory();
         }
         function removeTyping() {
           var t = chatBody.querySelector(".chat-typing");
@@ -2220,10 +2221,54 @@
           msg.textContent = text;
           chatBody.appendChild(msg);
           scrollChatBody();
+          saveHistory();
         }
         function setConnectionStatus(ok) {
           if (chatHeaderDot)
             chatHeaderDot.style.background = ok ? "#4caf50" : "#e74c3c";
+        }
+
+        var STORAGE_KEY = "nn_chat_history";
+
+        function saveHistory() {
+          var msgs = chatBody.querySelectorAll(".chat-msg");
+          var list = [];
+          msgs.forEach(function (m) {
+            var role = m.classList.contains("user")
+              ? "user"
+              : m.classList.contains("error")
+                ? "error"
+                : "assistant";
+            list.push({ role: role, text: m.textContent });
+          });
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+          } catch (_) {}
+        }
+
+        function loadHistory() {
+          try {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            var list = JSON.parse(raw);
+            if (!Array.isArray(list)) return;
+            list.forEach(function (item) {
+              var role = item.role === "user" ? "user" : "assistant";
+              var cls =
+                item.role === "error" ? "chat-msg error" : "chat-msg " + role;
+              var msg = document.createElement("div");
+              msg.className = cls;
+              msg.textContent = item.text;
+              chatBody.appendChild(msg);
+            });
+            scrollChatBody();
+          } catch (_) {}
+        }
+
+        function clearHistory() {
+          try {
+            localStorage.removeItem(STORAGE_KEY);
+          } catch (_) {}
         }
 
         async function runHealthCheck() {
@@ -2376,6 +2421,7 @@
             m.remove();
           });
           removeTyping();
+          clearHistory();
           addMessage("assistant", "聊天记录已清空，有什么想聊的？😊");
           fetch(CHAT_API + "/api/chat/history", { method: "DELETE" }).catch(
             function () {},
@@ -2385,6 +2431,7 @@
           if (isChatOpen && !chatWidget.contains(e.target)) closeChat();
         });
 
+        loadHistory();
         runHealthCheck();
       })();
     </script>
