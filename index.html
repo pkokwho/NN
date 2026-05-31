@@ -497,7 +497,7 @@
       }
       .stats-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
       }
       .stat-card {
         background: var(--surface);
@@ -1373,7 +1373,7 @@
           font-size: 0.6rem;
         }
         .stats-grid {
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(3, 1fr);
         }
         .stat-card {
           padding: 2.5rem 1.5rem;
@@ -1477,7 +1477,11 @@
         <div class="nav-dot"></div>
         <span class="nav-label">爱好</span>
       </div>
-      <div class="nav-dot-wrap" data-section="4" aria-label="联系">
+      <div class="nav-dot-wrap" data-section="4" aria-label="作品">
+        <div class="nav-dot"></div>
+        <span class="nav-label">作品</span>
+      </div>
+      <div class="nav-dot-wrap" data-section="5" aria-label="联系">
         <div class="nav-dot"></div>
         <span class="nav-label">联系</span>
       </div>
@@ -1497,7 +1501,8 @@
       <button class="mobile-nav-item" data-section="1">关于</button>
       <button class="mobile-nav-item" data-section="2">数据</button>
       <button class="mobile-nav-item" data-section="3">爱好</button>
-      <button class="mobile-nav-item" data-section="4">联系</button>
+      <button class="mobile-nav-item" data-section="4">作品</button>
+      <button class="mobile-nav-item" data-section="5">联系</button>
     </nav>
 
     <!-- ===== HERO ===== -->
@@ -1538,12 +1543,9 @@
             <h2 class="section-heading">我是谁</h2>
           </div>
           <div class="about-text reveal reveal-d2">
-            <p>我只不过是一个普通的不能再普通的人</p>
-            <p>我的爱好健身算一个，也断断续续练了3年左右，很普通很大众</p>
-            <p>因为很普通所以很喜欢学一些新的东西，像电子琴还有设计网站等。</p>
-            <p>
-              我这个人还是比较幽默的，喜欢开玩笑，情绪稳定，脾气好，但每到夜晚就会因为内耗睡不着。感觉自己不如别人，感觉自己没有干出什么名堂
-            </p>
+            <p>我是任年友，一个普通但不甘心一直普通的人。</p>
+            <p>喜欢健身，也喜欢折腾新东西，比如电子琴、网页设计和 AI 工具。</p>
+            <p>我不一定很厉害，但我一直在学习、尝试和成长。</p>
             <div class="about-signature">
               &#8212; 保持好奇，保持热爱，祝你每天开开心心无烦恼
             </div>
@@ -1560,21 +1562,25 @@
           <div class="art-line reveal"></div>
         </div>
         <div class="stats-grid">
-          <div class="stat-card reveal reveal-d2">
-            <div class="stat-number" data-count="infinity">&infin;</div>
+          <div class="stat-card reveal reveal-d1">
+            <div class="stat-number">&infin;</div>
             <div class="stat-label">热情指数</div>
           </div>
-          <div class="stat-card reveal reveal-d3">
-            <div class="stat-number" data-count="100">0%</div>
-            <div class="stat-label">正能量</div>
-          </div>
-          <div class="stat-card reveal reveal-d4">
-            <div class="stat-number" data-count="max">MAX</div>
+          <div class="stat-card reveal reveal-d2">
+            <div class="stat-number">MAX</div>
             <div class="stat-label">幽默感</div>
           </div>
-          <div class="stat-card reveal reveal-d5">
-            <div class="stat-number" data-count="3">0</div>
+          <div class="stat-card reveal reveal-d3">
+            <div class="stat-number" style="font-size: 1.4rem">加载中...</div>
             <div class="stat-label">健身热情</div>
+          </div>
+          <div class="stat-card reveal reveal-d4">
+            <div class="stat-number" style="font-size: 1.4rem">夜间限定</div>
+            <div class="stat-label">内耗程度</div>
+          </div>
+          <div class="stat-card reveal reveal-d5">
+            <div class="stat-number" style="font-size: 1.4rem">升级中</div>
+            <div class="stat-label">学习欲望</div>
           </div>
         </div>
       </div>
@@ -1729,8 +1735,81 @@
       </div>
     </section>
 
-    <!-- ===== CONTACT ===== -->
+    <!-- ===== PROJECTS ===== -->
     <section class="section" data-index="4">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-label">作品</p>
+          <h2 class="section-heading">折腾出的东西</h2>
+        </div>
+        <div class="hobbies-grid">
+          <div class="hobby-card reveal reveal-d1">
+            <div class="hobby-card-header">
+              <span class="hobby-icon">&#x1F310;</span>
+              <span class="hobby-card-num">01</span>
+            </div>
+            <h3 class="hobby-title">个人网站</h3>
+            <p class="hobby-desc">
+              你正在看的这个网站，从零搭建。HTML + CSS + JS 。
+            </p>
+            <div class="hobby-tags">
+              <span class="hobby-tag">HTML</span>
+              <span class="hobby-tag">CSS</span>
+              <span class="hobby-tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="hobby-card reveal reveal-d2">
+            <div class="hobby-card-header">
+              <span class="hobby-icon">&#x1F916;</span>
+              <span class="hobby-card-num">02</span>
+            </div>
+            <h3 class="hobby-title">AI 聊天助手</h3>
+            <p class="hobby-desc">
+              内置在网站里的 AI
+              智能助手，可以回答关于我的各种问题，也支持日常对话。
+            </p>
+            <div class="hobby-tags">
+              <span class="hobby-tag">AI</span>
+              <span class="hobby-tag">对话</span>
+              <span class="hobby-tag">API 集成</span>
+            </div>
+          </div>
+          <div class="hobby-card reveal reveal-d3">
+            <div class="hobby-card-header">
+              <span class="hobby-icon">&#x1F4BB;</span>
+              <span class="hobby-card-num">03</span>
+            </div>
+            <h3 class="hobby-title">本地部署 AI 模型</h3>
+            <p class="hobby-desc">
+              在本地电脑上跑 AI 模型，探索大语言模型的更多可能性。
+            </p>
+            <div class="hobby-tags">
+              <span class="hobby-tag">本地部署</span>
+              <span class="hobby-tag">LLM</span>
+              <span class="hobby-tag">折腾</span>
+            </div>
+          </div>
+          <div class="hobby-card reveal reveal-d4">
+            <div class="hobby-card-header">
+              <span class="hobby-icon">&#x1F3A8;</span>
+              <span class="hobby-card-num">04</span>
+            </div>
+            <h3 class="hobby-title">网页设计练习</h3>
+            <p class="hobby-desc">
+              各种前端练习作品，从简单布局到复杂交互，记录学习过程。
+            </p>
+            <div class="hobby-tags">
+              <span class="hobby-tag">UI 设计</span>
+              <span class="hobby-tag">前端</span>
+              <span class="hobby-tag">练习</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section" data-index="5">
       <div class="container">
         <div class="contact-layout">
           <div class="reveal">
@@ -1744,27 +1823,24 @@
           <div class="reveal reveal-d2">
             <div class="contact-links">
               <div
-                class="contact-link contact-toggle"
-                data-value="2493580059"
-                data-href="tencent://message/?uin=2493580059"
+                class="contact-link"
+                onclick="
+                  window.open('tencent://message/?uin=2493580059', '_blank')
+                "
               >
                 <span class="contact-link-label">QQ</span>
-                <span class="contact-link-value">点击查看</span>
-                <span class="contact-link-icon">&#x25BC;</span>
+                <span class="contact-link-value">点击发起会话</span>
+                <span class="contact-link-icon">&#x2197;</span>
               </div>
-              <div class="contact-link contact-toggle" data-value="w1234w3w">
+              <div class="contact-link">
                 <span class="contact-link-label">微信</span>
-                <span class="contact-link-value">点击查看</span>
-                <span class="contact-link-icon">&#x25BC;</span>
+                <span class="contact-link-value">通过 QQ 获取</span>
+                <span class="contact-link-icon">&#x2197;</span>
               </div>
-              <div
-                class="contact-link contact-toggle"
-                data-value="18319191164"
-                data-href="tel:18319191164"
-              >
+              <div class="contact-link">
                 <span class="contact-link-label">电话</span>
-                <span class="contact-link-value">点击查看</span>
-                <span class="contact-link-icon">&#x25BC;</span>
+                <span class="contact-link-value">通过 QQ 获取</span>
+                <span class="contact-link-icon">&#x2197;</span>
               </div>
             </div>
           </div>
@@ -1943,39 +2019,6 @@
           artObs.observe(el);
         });
 
-        // Stats count-up
-        var counted = false;
-        var statObs = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting && !counted) {
-                counted = true;
-                var nums = document.querySelectorAll(
-                  ".stat-number[data-count]",
-                );
-                nums.forEach(function (el) {
-                  var t = el.getAttribute("data-count");
-                  if (t === "infinity" || t === "max") return;
-                  var v = parseInt(t),
-                    c = 0,
-                    s = Math.max(1, Math.floor(v / 50));
-                  var timer = setInterval(function () {
-                    c += s;
-                    if (c >= v) {
-                      c = v;
-                      clearInterval(timer);
-                    }
-                    el.textContent = c + "%";
-                  }, 30);
-                });
-              }
-            });
-          },
-          { threshold: 0.5 },
-        );
-        var sg = document.querySelector(".stats-grid");
-        if (sg) statObs.observe(sg);
-
         // Hero parallax
         var hn = document.getElementById("heroName");
         if (hn) {
@@ -2103,60 +2146,6 @@
             if (d > 0) window.changeVideo(1);
             else window.changeVideo(-1);
           }
-        });
-
-        // Contact toggle
-        var toggles = document.querySelectorAll(".contact-toggle");
-        toggles.forEach(function (t) {
-          var followHandler = null;
-          t.addEventListener("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var isRevealed = t.classList.contains("revealed");
-            toggles.forEach(function (ot) {
-              ot.classList.remove("revealed");
-              ot.querySelector(".contact-link-value").textContent = "点击查看";
-              ot.style.cursor = "pointer";
-            });
-            if (!isRevealed) {
-              t.classList.add("revealed");
-              var val = t.getAttribute("data-value");
-              t.querySelector(".contact-link-value").textContent = val;
-              var href = t.getAttribute("data-href");
-              if (href) {
-                t.style.cursor = "alias";
-                followHandler = function follow(ev) {
-                  ev.stopPropagation();
-                  window.open(href, "_self");
-                };
-                t.addEventListener("click", followHandler);
-              }
-            } else {
-              if (followHandler) {
-                t.removeEventListener("click", followHandler);
-                followHandler = null;
-              }
-            }
-          });
-
-          t.addEventListener("mousemove", function (e) {
-            var r = t.getBoundingClientRect();
-            var x = e.clientX - r.left - r.width / 2;
-            var y = e.clientY - r.top - r.height / 2;
-            var v = t.querySelector(".contact-link-value");
-            if (v) {
-              v.style.transform =
-                "translate(" + x * 0.06 + "px," + y * 0.06 + "px)";
-              v.style.transition = "transform 0.12s ease-out";
-            }
-          });
-          t.addEventListener("mouseleave", function () {
-            var v = t.querySelector(".contact-link-value");
-            if (v) {
-              v.style.transform = "translate(0,0)";
-              v.style.transition = "transform 0.4s ease";
-            }
-          });
         });
 
         // ── AI Chat Widget (v2) ──
