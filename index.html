@@ -12,16 +12,16 @@
     <meta http-equiv="Expires" content="0" />
     <meta
       name="description"
-      content="任年友的个人空间 — 健身爱好者、电子琴新人、网页设计师，一个在现实与数字之间游走的普通人。"
+      content="任年友的个人主页 — 健身爱好者、电子琴爱好者、网页设计师。这里有我的个人作品、AI 项目、健身心得和更多折腾记录。"
     />
-    <meta property="og:title" content="任年友 — 个人空间" />
+    <meta property="og:title" content="任年友 — 个人主页" />
     <meta
       property="og:description"
-      content="健身爱好者、电子琴新人、网页设计师的个人主页。"
+      content="健身爱好者、电子琴爱好者、网页设计师的个人主页。记录学习、尝试和成长。"
     />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#f9f6f0" />
-    <title>任年友 — 个人空间</title>
+    <title>任年友 — 个人主页</title>
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>"
@@ -626,6 +626,192 @@
         color: var(--accent-dark);
       }
 
+      /* ===== PROJECT STATUS ===== */
+      .project-status {
+        display: inline-block;
+        font-family: "Inter", sans-serif;
+        font-size: 0.55rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        padding: 0.2rem 0.65rem;
+        border-radius: 2px;
+        margin-bottom: 0.75rem;
+      }
+      .project-status.done {
+        background: rgba(76, 175, 80, 0.1);
+        color: #3a7d44;
+      }
+      .project-status.wip {
+        background: rgba(255, 152, 0, 0.1);
+        color: #b87a00;
+      }
+      .project-status.iterating {
+        background: rgba(33, 150, 243, 0.1);
+        color: #1565c0;
+      }
+      .project-highlights {
+        margin-bottom: 1.5rem;
+        padding-left: 0;
+        list-style: none;
+      }
+      .project-highlights li {
+        font-size: 0.82rem;
+        font-weight: 300;
+        line-height: 1.8;
+        color: var(--text-soft);
+        position: relative;
+        padding-left: 1.2rem;
+        margin-bottom: 0.4rem;
+      }
+      .project-highlights li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        transform: translateY(-50%);
+      }
+      .project-view-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: "Inter", sans-serif;
+        font-size: 0.65rem;
+        font-weight: 400;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent-dark);
+        padding: 0.45rem 1rem;
+        border: 1px solid var(--accent-soft);
+        border-radius: 2px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        background: none;
+        text-decoration: none;
+      }
+      .project-view-btn:hover {
+        background: var(--accent-dark);
+        border-color: var(--accent-dark);
+        color: var(--white);
+      }
+
+      /* ===== PROJECT MODAL ===== */
+      .project-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(20, 18, 16, 0.94);
+        z-index: 9998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .project-modal.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .project-modal-content {
+        background: var(--surface);
+        max-width: 560px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        border-radius: 12px;
+        padding: 3rem 2.5rem 2.5rem;
+        transform: scale(0.94);
+        transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+        position: relative;
+      }
+      .project-modal.active .project-modal-content {
+        transform: scale(1);
+      }
+      .project-modal-content::-webkit-scrollbar {
+        width: 4px;
+      }
+      .project-modal-content::-webkit-scrollbar-thumb {
+        background: var(--border-soft);
+        border-radius: 2px;
+      }
+      .project-modal-close {
+        position: absolute;
+        top: 1.2rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 1.6rem;
+        cursor: pointer;
+        transition: color 0.3s;
+        font-family: "Inter", sans-serif;
+        font-weight: 200;
+        line-height: 1;
+        padding: 0.3rem;
+      }
+      .project-modal-close:hover {
+        color: var(--text);
+      }
+      .project-modal-title {
+        font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+      .project-modal-status {
+        margin-bottom: 1.5rem;
+      }
+      .project-modal-section {
+        margin-bottom: 1.5rem;
+      }
+      .project-modal-section-title {
+        font-family: "Inter", sans-serif;
+        font-size: 0.55rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 0.75rem;
+      }
+      .project-modal-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .project-modal-highlights {
+        list-style: none;
+        padding-left: 0;
+      }
+      .project-modal-highlights li {
+        font-size: 0.88rem;
+        font-weight: 300;
+        line-height: 1.9;
+        color: var(--text-soft);
+        position: relative;
+        padding-left: 1.2rem;
+        margin-bottom: 0.4rem;
+      }
+      .project-modal-highlights li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        transform: translateY(-50%);
+      }
+
       /* Image Slider */
       .image-slider {
         position: relative;
@@ -885,6 +1071,12 @@
       .contact-link:hover {
         padding-left: 0.75rem;
       }
+      #qqCopyLink .contact-link-value {
+        transition: color 0.3s ease;
+      }
+      #qqCopyLink:hover .contact-link-value {
+        color: var(--accent-dark);
+      }
       .contact-link-label {
         font-family: "Inter", sans-serif;
         font-size: 0.55rem;
@@ -940,7 +1132,7 @@
       /* ===== AI CHAT WIDGET ===== */
       .chat-widget {
         position: fixed;
-        bottom: 2rem;
+        bottom: 1.2rem;
         right: 2.5rem;
         z-index: 998;
         font-family: "Inter", "Noto Serif SC", sans-serif;
@@ -1200,7 +1392,7 @@
           max-height: 420px;
         }
         .chat-widget {
-          bottom: 4.2rem;
+          bottom: 4rem;
           right: 1rem;
         }
       }
@@ -1244,7 +1436,7 @@
       /* ===== BACK TO TOP ===== */
       .back-to-top {
         position: fixed;
-        bottom: 2rem;
+        bottom: 3.8rem;
         right: 2.5rem;
         width: 38px;
         height: 38px;
@@ -1317,7 +1509,7 @@
           color: var(--accent-dark);
         }
         .back-to-top {
-          bottom: 4.5rem;
+          bottom: 6.5rem;
           right: 1rem;
           width: 34px;
           height: 34px;
@@ -1458,6 +1650,15 @@
         id="lightboxCounter"
         aria-live="polite"
       ></div>
+    </div>
+
+    <!-- ===== PROJECT MODAL ===== -->
+    <div class="project-modal" id="projectModal" aria-hidden="true">
+      <div class="project-modal-content">
+        <button class="project-modal-close" id="projectModalClose" aria-label="关闭">&#x2715;</button>
+        <h3 class="project-modal-title" id="projectModalTitle"></h3>
+        <div id="projectModalBody"></div>
+      </div>
     </div>
 
     <nav class="nav-line" aria-label="页面导航">
@@ -1748,61 +1949,84 @@
               <span class="hobby-icon">&#x1F310;</span>
               <span class="hobby-card-num">01</span>
             </div>
+            <span class="project-status done">已完成</span>
             <h3 class="hobby-title">个人网站</h3>
             <p class="hobby-desc">
-              你正在看的这个网站，从零搭建。HTML + CSS + JS 。
+              你正在看的这个网站，从零搭建。HTML + CSS + JS，在 Trae AI 辅助下完成，没有用任何框架。
             </p>
+            <ul class="project-highlights">
+              <li>响应式设计，适配手机和桌面</li>
+              <li>内置 AI 聊天助手</li>
+            </ul>
             <div class="hobby-tags">
               <span class="hobby-tag">HTML</span>
               <span class="hobby-tag">CSS</span>
               <span class="hobby-tag">JavaScript</span>
             </div>
+            <button class="project-view-btn" data-project="personal-site">查看详情 &#x2197;</button>
           </div>
           <div class="hobby-card reveal reveal-d2">
             <div class="hobby-card-header">
               <span class="hobby-icon">&#x1F916;</span>
               <span class="hobby-card-num">02</span>
             </div>
+            <span class="project-status iterating">持续迭代</span>
             <h3 class="hobby-title">AI 聊天助手</h3>
             <p class="hobby-desc">
-              内置在网站里的 AI
-              智能助手，可以回答关于我的各种问题，也支持日常对话。
+              内置在网站里的 AI 智能助手，可以回答关于我的各种问题，也支持日常对话。
             </p>
+            <ul class="project-highlights">
+              <li>支持多轮对话和历史记录</li>
+              <li>自动诊断和修复连接问题</li>
+            </ul>
             <div class="hobby-tags">
               <span class="hobby-tag">AI</span>
               <span class="hobby-tag">对话</span>
               <span class="hobby-tag">API 集成</span>
             </div>
+            <button class="project-view-btn" data-project="ai-chat">查看详情 &#x2197;</button>
           </div>
           <div class="hobby-card reveal reveal-d3">
             <div class="hobby-card-header">
               <span class="hobby-icon">&#x1F4BB;</span>
               <span class="hobby-card-num">03</span>
             </div>
+            <span class="project-status wip">进行中</span>
             <h3 class="hobby-title">本地部署 AI 模型</h3>
             <p class="hobby-desc">
               在本地电脑上跑 AI 模型，探索大语言模型的更多可能性。
             </p>
+            <ul class="project-highlights">
+              <li>离线运行，保护隐私</li>
+              <li>探索本地 API 调用</li>
+            </ul>
             <div class="hobby-tags">
               <span class="hobby-tag">本地部署</span>
               <span class="hobby-tag">LLM</span>
               <span class="hobby-tag">折腾</span>
             </div>
+            <button class="project-view-btn" data-project="local-ai">查看详情 &#x2197;</button>
           </div>
           <div class="hobby-card reveal reveal-d4">
             <div class="hobby-card-header">
               <span class="hobby-icon">&#x1F3A8;</span>
               <span class="hobby-card-num">04</span>
             </div>
+            <span class="project-status iterating">持续迭代</span>
             <h3 class="hobby-title">网页设计练习</h3>
             <p class="hobby-desc">
               各种前端练习作品，从简单布局到复杂交互，记录学习过程。
             </p>
+            <ul class="project-highlights">
+              <li>多种布局练习和动画效果</li>
+              <li>响应式和暗色主题尝试</li>
+            </ul>
             <div class="hobby-tags">
               <span class="hobby-tag">UI 设计</span>
               <span class="hobby-tag">前端</span>
               <span class="hobby-tag">练习</span>
             </div>
+            <button class="project-view-btn" data-project="web-design">查看详情 &#x2197;</button>
           </div>
         </div>
       </div>
@@ -1822,16 +2046,11 @@
           </div>
           <div class="reveal reveal-d2">
             <div class="contact-links">
-              <a
-                class="contact-link"
-                href="https://wpa.qq.com/msgrd?v=3&uin=2493580059&site=qq&menu=yes"
-                target="_blank"
-                rel="noopener"
-              >
+              <div class="contact-link" id="qqCopyLink">
                 <span class="contact-link-label">QQ</span>
-                <span class="contact-link-value">点击发起会话</span>
+                <span class="contact-link-value" id="qqValue">点击复制 QQ 号</span>
                 <span class="contact-link-icon">&#x2197;</span>
-              </a>
+              </div>
               <div class="contact-link">
                 <span class="contact-link-label">微信</span>
                 <span class="contact-link-value">通过 QQ 获取</span>
@@ -1894,6 +2113,8 @@
         <div class="chat-body" id="chatBody">
           <div class="chat-msg assistant">
             你好！我是任年友的AI智能助手"小友"👋 有什么想了解的尽管问我~
+            <br /><br />
+            💡 提示：小友是 AI 助手，不代表本人实时在线，也不会提供隐私联系方式哦。
           </div>
         </div>
         <div class="chat-input-row">
@@ -2146,6 +2367,141 @@
             if (d > 0) window.changeVideo(1);
             else window.changeVideo(-1);
           }
+        });
+
+        // Contact QQ copy
+        var qqLink = document.getElementById("qqCopyLink");
+        var qqValue = document.getElementById("qqValue");
+        if (qqLink && qqValue) {
+          qqLink.addEventListener("click", function () {
+            var qq = "2493580059";
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(qq).then(function () {
+                qqValue.textContent = "已复制： " + qq;
+              });
+            } else {
+              var ta = document.createElement("textarea");
+              ta.value = qq;
+              ta.style.position = "fixed";
+              ta.style.opacity = "0";
+              document.body.appendChild(ta);
+              ta.select();
+              try {
+                document.execCommand("copy");
+                qqValue.textContent = "已复制： " + qq;
+              } catch (_) {
+                qqValue.textContent = qq;
+              }
+              document.body.removeChild(ta);
+            }
+            setTimeout(function () {
+              qqValue.textContent = "点击复制 QQ 号";
+            }, 3000);
+          });
+        }
+
+        // ── Project Modal ──
+        var projectData = {
+          "personal-site": {
+            name: "个人网站",
+            status: { label: "已完成", cls: "done" },
+            tech: ["HTML", "CSS", "JavaScript"],
+            highlights: ["响应式设计，适配手机和桌面", "内置 AI 聊天助手", "在 Trae AI 辅助下从零搭建"],
+            learnings: ["掌握了 CSS Grid 和 Flexbox 布局", "学会了 IntersectionObserver 实现滚动动画", "了解了前端性能优化和 SEO"]
+          },
+          "ai-chat": {
+            name: "AI 聊天助手",
+            status: { label: "持续迭代", cls: "iterating" },
+            tech: ["AI API", "Fetch", "LocalStorage"],
+            highlights: ["支持多轮对话和历史记录", "自动诊断和修复连接问题", "一键诊断功能"],
+            learnings: ["熟悉了 RESTful API 调用和错误处理", "实现了聊天记录本地持久化", "学会了健康检查和自动重试机制"]
+          },
+          "local-ai": {
+            name: "本地部署 AI 模型",
+            status: { label: "进行中", cls: "wip" },
+            tech: ["Python", "Ollama", "Docker"],
+            highlights: ["离线运行，保护隐私", "探索本地 API 调用", "对比不同开源模型效果"],
+            learnings: ["了解了大语言模型的本地部署流程", "学习了 Docker 容器化部署", "探索了 Prompt Engineering 技巧"]
+          },
+          "web-design": {
+            name: "网页设计练习",
+            status: { label: "持续迭代", cls: "iterating" },
+            tech: ["HTML", "CSS", "JavaScript", "动画"],
+            highlights: ["多种布局练习和动画效果", "响应式和暗色主题尝试", "持续学习前沿设计趋势"],
+            learnings: ["从临摹到原创的过渡", "理解了设计系统和一致性的重要性", "培养了审美和交互思维"]
+          }
+        };
+
+        var pModal = document.getElementById("projectModal");
+        var pModalTitle = document.getElementById("projectModalTitle");
+        var pModalBody = document.getElementById("projectModalBody");
+        var pModalClose = document.getElementById("projectModalClose");
+        var pModalOpen = false;
+
+        function openProjectModal(projectKey) {
+          var data = projectData[projectKey];
+          if (!data) return;
+
+          pModalTitle.textContent = data.name;
+
+          var html = '';
+          html += '<span class="project-status ' + data.status.cls + ' project-modal-status">' + data.status.label + '</span>';
+
+          html += '<div class="project-modal-section">';
+          html += '<p class="project-modal-section-title">技术栈</p>';
+          html += '<div class="project-modal-tags">';
+          for (var i = 0; i < data.tech.length; i++) {
+            html += '<span class="hobby-tag">' + data.tech[i] + '</span>';
+          }
+          html += '</div></div>';
+
+          html += '<div class="project-modal-section">';
+          html += '<p class="project-modal-section-title">项目亮点</p>';
+          html += '<ul class="project-modal-highlights">';
+          for (var i = 0; i < data.highlights.length; i++) {
+            html += '<li>' + data.highlights[i] + '</li>';
+          }
+          html += '</ul></div>';
+
+          html += '<div class="project-modal-section">';
+          html += '<p class="project-modal-section-title">学习收获</p>';
+          html += '<ul class="project-modal-highlights">';
+          for (var i = 0; i < data.learnings.length; i++) {
+            html += '<li>' + data.learnings[i] + '</li>';
+          }
+          html += '</ul></div>';
+
+          pModalBody.innerHTML = html;
+          pModal.classList.add("active");
+          pModal.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+          pModalOpen = true;
+        }
+
+        function closeProjectModal() {
+          pModal.classList.remove("active");
+          pModal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+          pModalOpen = false;
+        }
+
+        document.querySelectorAll(".project-view-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var key = this.getAttribute("data-project");
+            openProjectModal(key);
+          });
+        });
+
+        if (pModalClose) pModalClose.addEventListener("click", closeProjectModal);
+
+        if (pModal) {
+          pModal.addEventListener("click", function (e) {
+            if (e.target === pModal) closeProjectModal();
+          });
+        }
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && pModalOpen) closeProjectModal();
         });
 
         // ── AI Chat Widget (v2) ──
