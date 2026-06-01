@@ -1824,7 +1824,13 @@
     <!-- ===== PROJECT MODAL ===== -->
     <div class="project-modal" id="projectModal" aria-hidden="true">
       <div class="project-modal-content">
-        <button class="project-modal-close" id="projectModalClose" aria-label="关闭">&#x2715;</button>
+        <button
+          class="project-modal-close"
+          id="projectModalClose"
+          aria-label="关闭"
+        >
+          &#x2715;
+        </button>
         <h3 class="project-modal-title" id="projectModalTitle"></h3>
         <div id="projectModalBody"></div>
       </div>
@@ -2126,7 +2132,8 @@
             <span class="project-status done">已完成</span>
             <h3 class="hobby-title">个人网站</h3>
             <p class="hobby-desc">
-              你正在看的这个网站，从零搭建。HTML + CSS + JS，在 Trae AI 辅助下完成，没有用任何框架。
+              你正在看的这个网站，从零搭建。HTML + CSS + JS，在 Trae AI
+              辅助下完成，没有用任何框架。
             </p>
             <ul class="project-highlights">
               <li>响应式设计，适配手机和桌面</li>
@@ -2137,7 +2144,9 @@
               <span class="hobby-tag">CSS</span>
               <span class="hobby-tag">JavaScript</span>
             </div>
-            <button class="project-view-btn" data-project="personal-site">查看详情 &#x2197;</button>
+            <button class="project-view-btn" data-project="personal-site">
+              查看详情 &#x2197;
+            </button>
           </div>
           <div class="hobby-card reveal reveal-d2">
             <div class="hobby-card-header">
@@ -2147,7 +2156,8 @@
             <span class="project-status iterating">持续迭代</span>
             <h3 class="hobby-title">AI 聊天助手</h3>
             <p class="hobby-desc">
-              内置在网站里的 AI 智能助手，可以回答关于我的各种问题，也支持日常对话。
+              内置在网站里的 AI
+              智能助手，可以回答关于我的各种问题，也支持日常对话。
             </p>
             <ul class="project-highlights">
               <li>支持多轮对话和历史记录</li>
@@ -2158,7 +2168,9 @@
               <span class="hobby-tag">对话</span>
               <span class="hobby-tag">API 集成</span>
             </div>
-            <button class="project-view-btn" data-project="ai-chat">查看详情 &#x2197;</button>
+            <button class="project-view-btn" data-project="ai-chat">
+              查看详情 &#x2197;
+            </button>
           </div>
           <div class="hobby-card reveal reveal-d3">
             <div class="hobby-card-header">
@@ -2179,7 +2191,9 @@
               <span class="hobby-tag">LLM</span>
               <span class="hobby-tag">折腾</span>
             </div>
-            <button class="project-view-btn" data-project="local-ai">查看详情 &#x2197;</button>
+            <button class="project-view-btn" data-project="local-ai">
+              查看详情 &#x2197;
+            </button>
           </div>
           <div class="hobby-card reveal reveal-d4">
             <div class="hobby-card-header">
@@ -2200,7 +2214,41 @@
               <span class="hobby-tag">前端</span>
               <span class="hobby-tag">练习</span>
             </div>
-            <button class="project-view-btn" data-project="web-design">查看详情 &#x2197;</button>
+            <button class="project-view-btn" data-project="web-design">
+              查看详情 &#x2197;
+            </button>
+          </div>
+          <div class="hobby-card reveal reveal-d5">
+            <div class="hobby-card-header">
+              <span class="hobby-icon">&#x1F4F0;</span>
+              <span class="hobby-card-num">05</span>
+            </div>
+            <span class="project-status iterating">持续迭代</span>
+            <h3 class="hobby-title">AI 资讯日报</h3>
+            <p class="hobby-desc">
+              一个自动整理 AI 新闻资讯的小项目，可以抓取多个来源的 AI
+              文章，并生成中文日报和摘要页面，方便快速了解 AI 行业动态。
+            </p>
+            <ul class="project-highlights">
+              <li>自动整理 AI 领域最新资讯</li>
+              <li>支持中文摘要和完整报告</li>
+              <li>展示文章数量、来源数量和更新时间</li>
+            </ul>
+            <div class="hobby-tags">
+              <span class="hobby-tag">AI News Scraper</span>
+              <span class="hobby-tag">GitHub Pages</span>
+              <span class="hobby-tag">自动化</span>
+            </div>
+            <button
+              class="project-view-btn"
+              data-project="ai-news"
+              onclick="
+                window.open('https://pkokwho.github.io/zq/', '_blank');
+                event.stopPropagation();
+              "
+            >
+              查看项目 &#x2197;
+            </button>
           </div>
         </div>
       </div>
@@ -2214,16 +2262,20 @@
           <h2 class="section-heading">形象提升自测工具</h2>
         </div>
         <div class="reveal reveal-d2">
-          <p class="about-text" style="max-width:680px;margin-bottom:2rem">
+          <p class="about-text" style="max-width: 680px; margin-bottom: 2rem">
             通过几个简单问题，获得适合你的穿搭、拍照、健身和气质提升建议。本工具不进行颜值评分或身材打分，只提供积极、健康、实用的个人提升建议。
           </p>
-          <div class="hobby-card" style="margin-bottom:1.5rem;padding:1.5rem 2rem">
-            <p class="hobby-desc" style="margin:0;font-size:0.82rem">
-              💡 安全提示：本工具不会上传图片，不会保存你的信息，不进行颜值评分、身材打分、身份识别或隐私判断。结果仅供参考，重点是帮助你变得更自信、更清爽、更有方向。
+          <div
+            class="hobby-card"
+            style="margin-bottom: 1.5rem; padding: 1.5rem 2rem"
+          >
+            <p class="hobby-desc" style="margin: 0; font-size: 0.82rem">
+              💡
+              安全提示：本工具不会上传图片，不会保存你的信息，不进行颜值评分、身材打分、身份识别或隐私判断。结果仅供参考，重点是帮助你变得更自信、更清爽、更有方向。
             </p>
           </div>
         </div>
-        <div class="reveal reveal-d3" style="max-width:700px">
+        <div class="reveal reveal-d3" style="max-width: 700px">
           <!-- 问题 1 -->
           <div class="quiz-question" data-q="1">
             <p class="quiz-q-title">1. 你最想提升哪个方面？</p>
@@ -2232,18 +2284,30 @@
               <button class="quiz-opt" data-value="拍照表现">拍照表现</button>
               <button class="quiz-opt" data-value="健身状态">健身状态</button>
               <button class="quiz-opt" data-value="发型气质">发型气质</button>
-              <button class="quiz-opt" data-value="整体自信感">整体自信感</button>
+              <button class="quiz-opt" data-value="整体自信感">
+                整体自信感
+              </button>
             </div>
           </div>
           <!-- 问题 2 -->
           <div class="quiz-question" data-q="2">
             <p class="quiz-q-title">2. 你现在最大的困扰是什么？</p>
             <div class="quiz-options">
-              <button class="quiz-opt" data-value="不知道怎么搭配衣服">不知道怎么搭配衣服</button>
-              <button class="quiz-opt" data-value="拍照看起来不自然">拍照看起来不自然</button>
-              <button class="quiz-opt" data-value="身材管理没有方向">身材管理没有方向</button>
-              <button class="quiz-opt" data-value="不知道适合什么风格">不知道适合什么风格</button>
-              <button class="quiz-opt" data-value="看起来不够精神">看起来不够精神</button>
+              <button class="quiz-opt" data-value="不知道怎么搭配衣服">
+                不知道怎么搭配衣服
+              </button>
+              <button class="quiz-opt" data-value="拍照看起来不自然">
+                拍照看起来不自然
+              </button>
+              <button class="quiz-opt" data-value="身材管理没有方向">
+                身材管理没有方向
+              </button>
+              <button class="quiz-opt" data-value="不知道适合什么风格">
+                不知道适合什么风格
+              </button>
+              <button class="quiz-opt" data-value="看起来不够精神">
+                看起来不够精神
+              </button>
             </div>
           </div>
           <!-- 问题 3 -->
@@ -2252,7 +2316,9 @@
             <div class="quiz-options">
               <button class="quiz-opt" data-value="清爽简约">清爽简约</button>
               <button class="quiz-opt" data-value="阳光运动">阳光运动</button>
-              <button class="quiz-opt" data-value="干净少年感">干净少年感</button>
+              <button class="quiz-opt" data-value="干净少年感">
+                干净少年感
+              </button>
               <button class="quiz-opt" data-value="稳重成熟">稳重成熟</button>
               <button class="quiz-opt" data-value="韩系休闲">韩系休闲</button>
             </div>
@@ -2263,9 +2329,13 @@
             <div class="quiz-options">
               <button class="quiz-opt" data-value="学校日常">学校日常</button>
               <button class="quiz-opt" data-value="朋友聚会">朋友聚会</button>
-              <button class="quiz-opt" data-value="拍照发朋友圈">拍照发朋友圈</button>
+              <button class="quiz-opt" data-value="拍照发朋友圈">
+                拍照发朋友圈
+              </button>
               <button class="quiz-opt" data-value="面试展示">面试展示</button>
-              <button class="quiz-opt" data-value="日常变帅变精神">日常变帅变精神</button>
+              <button class="quiz-opt" data-value="日常变帅变精神">
+                日常变帅变精神
+              </button>
             </div>
           </div>
           <!-- 问题 5 -->
@@ -2274,14 +2344,22 @@
             <div class="quiz-options">
               <button class="quiz-opt" data-value="简单直接">简单直接</button>
               <button class="quiz-opt" data-value="详细一点">详细一点</button>
-              <button class="quiz-opt" data-value="适合学生预算">适合学生预算</button>
-              <button class="quiz-opt" data-value="偏运动健身">偏运动健身</button>
-              <button class="quiz-opt" data-value="偏穿搭拍照">偏穿搭拍照</button>
+              <button class="quiz-opt" data-value="适合学生预算">
+                适合学生预算
+              </button>
+              <button class="quiz-opt" data-value="偏运动健身">
+                偏运动健身
+              </button>
+              <button class="quiz-opt" data-value="偏穿搭拍照">
+                偏穿搭拍照
+              </button>
             </div>
           </div>
           <!-- 操作按钮 -->
           <div class="quiz-actions">
-            <button class="quiz-generate-btn" id="quizGenerate">生成建议 &#x2192;</button>
+            <button class="quiz-generate-btn" id="quizGenerate">
+              生成建议 &#x2192;
+            </button>
           </div>
           <p class="quiz-error" id="quizError"></p>
           <!-- 结果区 -->
@@ -2306,7 +2384,9 @@
             <div class="contact-links">
               <div class="contact-link" id="qqCopyLink">
                 <span class="contact-link-label">QQ</span>
-                <span class="contact-link-value" id="qqValue">点击复制 QQ 号</span>
+                <span class="contact-link-value" id="qqValue"
+                  >点击复制 QQ 号</span
+                >
                 <span class="contact-link-icon">&#x2197;</span>
               </div>
               <div class="contact-link">
@@ -2372,7 +2452,8 @@
           <div class="chat-msg assistant">
             你好！我是任年友的AI智能助手"小友"👋 有什么想了解的尽管问我~
             <br /><br />
-            💡 提示：小友是 AI 助手，不代表本人实时在线，也不会提供隐私联系方式哦。
+            💡 提示：小友是 AI
+            助手，不代表本人实时在线，也不会提供隐私联系方式哦。
           </div>
         </div>
         <div class="chat-input-row">
@@ -2664,30 +2745,80 @@
             name: "个人网站",
             status: { label: "已完成", cls: "done" },
             tech: ["HTML", "CSS", "JavaScript"],
-            highlights: ["响应式设计，适配手机和桌面", "内置 AI 聊天助手", "在 Trae AI 辅助下从零搭建"],
-            learnings: ["掌握了 CSS Grid 和 Flexbox 布局", "学会了 IntersectionObserver 实现滚动动画", "了解了前端性能优化和 SEO"]
+            highlights: [
+              "响应式设计，适配手机和桌面",
+              "内置 AI 聊天助手",
+              "在 Trae AI 辅助下从零搭建",
+            ],
+            learnings: [
+              "掌握了 CSS Grid 和 Flexbox 布局",
+              "学会了 IntersectionObserver 实现滚动动画",
+              "了解了前端性能优化和 SEO",
+            ],
           },
           "ai-chat": {
             name: "AI 聊天助手",
             status: { label: "持续迭代", cls: "iterating" },
             tech: ["AI API", "Fetch", "LocalStorage"],
-            highlights: ["支持多轮对话和历史记录", "自动诊断和修复连接问题", "一键诊断功能"],
-            learnings: ["熟悉了 RESTful API 调用和错误处理", "实现了聊天记录本地持久化", "学会了健康检查和自动重试机制"]
+            highlights: [
+              "支持多轮对话和历史记录",
+              "自动诊断和修复连接问题",
+              "一键诊断功能",
+            ],
+            learnings: [
+              "熟悉了 RESTful API 调用和错误处理",
+              "实现了聊天记录本地持久化",
+              "学会了健康检查和自动重试机制",
+            ],
           },
           "local-ai": {
             name: "本地部署 AI 模型",
             status: { label: "进行中", cls: "wip" },
             tech: ["Python", "Ollama", "Docker"],
-            highlights: ["离线运行，保护隐私", "探索本地 API 调用", "对比不同开源模型效果"],
-            learnings: ["了解了大语言模型的本地部署流程", "学习了 Docker 容器化部署", "探索了 Prompt Engineering 技巧"]
+            highlights: [
+              "离线运行，保护隐私",
+              "探索本地 API 调用",
+              "对比不同开源模型效果",
+            ],
+            learnings: [
+              "了解了大语言模型的本地部署流程",
+              "学习了 Docker 容器化部署",
+              "探索了 Prompt Engineering 技巧",
+            ],
           },
           "web-design": {
             name: "网页设计练习",
             status: { label: "持续迭代", cls: "iterating" },
             tech: ["HTML", "CSS", "JavaScript", "动画"],
-            highlights: ["多种布局练习和动画效果", "响应式和暗色主题尝试", "持续学习前沿设计趋势"],
-            learnings: ["从临摹到原创的过渡", "理解了设计系统和一致性的重要性", "培养了审美和交互思维"]
-          }
+            highlights: [
+              "多种布局练习和动画效果",
+              "响应式和暗色主题尝试",
+              "持续学习前沿设计趋势",
+            ],
+            learnings: [
+              "从临摹到原创的过渡",
+              "理解了设计系统和一致性的重要性",
+              "培养了审美和交互思维",
+            ],
+          },
+          "ai-news": {
+            name: "AI 资讯日报",
+            status: { label: "持续迭代", cls: "iterating" },
+            tech: ["AI News Scraper", "GitHub Pages", "自动化", "中文摘要"],
+            highlights: [
+              "页面结构清晰，适合阅读",
+              "支持日报列表和摘要页面",
+              "内容围绕 AI 新闻和技术动态",
+              "可以作为后续自动化项目的基础",
+            ],
+            learnings: [
+              "练习自动化信息整理",
+              "学习如何把数据整理成网页",
+              "让个人网站作品区更丰富",
+              "展示对 AI 工具和前端项目的学习过程",
+            ],
+            link: "https://pkokwho.github.io/zq/",
+          },
         };
 
         var pModal = document.getElementById("projectModal");
@@ -2702,32 +2833,37 @@
 
           pModalTitle.textContent = data.name;
 
-          var html = '';
-          html += '<span class="project-status ' + data.status.cls + ' project-modal-status">' + data.status.label + '</span>';
+          var html = "";
+          html +=
+            '<span class="project-status ' +
+            data.status.cls +
+            ' project-modal-status">' +
+            data.status.label +
+            "</span>";
 
           html += '<div class="project-modal-section">';
           html += '<p class="project-modal-section-title">技术栈</p>';
           html += '<div class="project-modal-tags">';
           for (var i = 0; i < data.tech.length; i++) {
-            html += '<span class="hobby-tag">' + data.tech[i] + '</span>';
+            html += '<span class="hobby-tag">' + data.tech[i] + "</span>";
           }
-          html += '</div></div>';
+          html += "</div></div>";
 
           html += '<div class="project-modal-section">';
           html += '<p class="project-modal-section-title">项目亮点</p>';
           html += '<ul class="project-modal-highlights">';
           for (var i = 0; i < data.highlights.length; i++) {
-            html += '<li>' + data.highlights[i] + '</li>';
+            html += "<li>" + data.highlights[i] + "</li>";
           }
-          html += '</ul></div>';
+          html += "</ul></div>";
 
           html += '<div class="project-modal-section">';
           html += '<p class="project-modal-section-title">学习收获</p>';
           html += '<ul class="project-modal-highlights">';
           for (var i = 0; i < data.learnings.length; i++) {
-            html += '<li>' + data.learnings[i] + '</li>';
+            html += "<li>" + data.learnings[i] + "</li>";
           }
-          html += '</ul></div>';
+          html += "</ul></div>";
 
           pModalBody.innerHTML = html;
           pModal.classList.add("active");
@@ -2750,7 +2886,8 @@
           });
         });
 
-        if (pModalClose) pModalClose.addEventListener("click", closeProjectModal);
+        if (pModalClose)
+          pModalClose.addEventListener("click", closeProjectModal);
 
         if (pModal) {
           pModal.addEventListener("click", function (e) {
@@ -2767,9 +2904,11 @@
         document.querySelectorAll(".quiz-opt").forEach(function (btn) {
           btn.addEventListener("click", function () {
             var qNum = this.closest(".quiz-question").getAttribute("data-q");
-            this.closest(".quiz-options").querySelectorAll(".quiz-opt").forEach(function (b) {
-              b.classList.remove("selected");
-            });
+            this.closest(".quiz-options")
+              .querySelectorAll(".quiz-opt")
+              .forEach(function (b) {
+                b.classList.remove("selected");
+              });
             this.classList.add("selected");
             quizAnswers[qNum] = this.getAttribute("data-value");
             document.getElementById("quizError").textContent = "";
@@ -2784,19 +2923,32 @@
           }
           err.textContent = "";
 
-          var a1 = quizAnswers[1], a2 = quizAnswers[2], a3 = quizAnswers[3], a4 = quizAnswers[4], a5 = quizAnswers[5];
-          var isStudent = (a5 === "适合学生预算");
-          var isDetailed = (a5 === "详细一点");
-          var isFitness = (a5 === "偏运动健身");
-          var isStyle = (a5 === "偏穿搭拍照");
+          var a1 = quizAnswers[1],
+            a2 = quizAnswers[2],
+            a3 = quizAnswers[3],
+            a4 = quizAnswers[4],
+            a5 = quizAnswers[5];
+          var isStudent = a5 === "适合学生预算";
+          var isDetailed = a5 === "详细一点";
+          var isFitness = a5 === "偏运动健身";
+          var isStyle = a5 === "偏穿搭拍照";
 
           // 提升方向
-          var direction = "你的核心提升方向：「" + a1 + "」，风格偏好「" + a3 + "」，主要场景是「" + a4 + "」";
+          var direction =
+            "你的核心提升方向：「" +
+            a1 +
+            "」，风格偏好「" +
+            a3 +
+            "」，主要场景是「" +
+            a4 +
+            "」";
 
           // 穿搭建议
           var clothes = [];
           if (a1 === "穿搭形象" || isStyle) {
-            clothes.push("选择基础款为主：纯色 T 恤/衬衫 + 直筒裤，干净利落就是最大的加分项");
+            clothes.push(
+              "选择基础款为主：纯色 T 恤/衬衫 + 直筒裤，干净利落就是最大的加分项",
+            );
             clothes.push("颜色不超过 3 种，黑/白/灰/藏蓝/卡其最百搭");
             if (a3 === "清爽简约" || a3 === "干净少年感") {
               clothes.push("白 T + 浅色牛仔裤 + 小白鞋，永远不出错的组合");
@@ -2811,7 +2963,9 @@
               clothes.push("宽松针织衫 + 阔腿裤 + 帆布鞋，慵懒有型");
             }
           } else {
-            clothes.push("穿搭不需要复杂，干净整洁是第一步，衣服熨平整、鞋子刷干净就够了");
+            clothes.push(
+              "穿搭不需要复杂，干净整洁是第一步，衣服熨平整、鞋子刷干净就够了",
+            );
             clothes.push("基础款打底，慢慢找到适合自己的风格");
           }
           if (isStudent) {
@@ -2836,10 +2990,14 @@
           var fitness = [];
           if (a1 === "健身状态" || isFitness) {
             fitness.push("每周 3 次基础运动，每次 20-30 分钟即可，贵在坚持");
-            fitness.push("注意体态：挺胸、收腹、肩膀打开，这是最快提升气质的方法");
+            fitness.push(
+              "注意体态：挺胸、收腹、肩膀打开，这是最快提升气质的方法",
+            );
             fitness.push("不要久坐，每坐 1 小时站起来活动 5 分钟");
           } else {
-            fitness.push("体态比身材更重要，挺胸收腹走路，整个人看起来精神很多");
+            fitness.push(
+              "体态比身材更重要，挺胸收腹走路，整个人看起来精神很多",
+            );
             fitness.push("每天做 10 个俯卧撑，慢慢增加，不需要去健身房");
           }
           if (a2 === "看起来不够精神") {
@@ -2857,7 +3015,7 @@
             { day: "周四", task: "学习一个穿搭技巧，整理发型" },
             { day: "周五", task: "用新穿搭拍一张自然照片" },
             { day: "周六", task: "复盘本周变化，记录感受" },
-            { day: "周日", task: "休息调整，准备下周继续" }
+            { day: "周日", task: "休息调整，准备下周继续" },
           ];
           if (isFitness) {
             weekPlan = [
@@ -2867,7 +3025,7 @@
               { day: "周四", task: "跑步 20 分钟 + 拉伸" },
               { day: "周五", task: "核心训练（平板支撑 3 组）" },
               { day: "周六", task: "自由运动或休息" },
-              { day: "周日", task: "完全休息，拉伸放松" }
+              { day: "周日", task: "完全休息，拉伸放松" },
             ];
           }
 
@@ -2877,7 +3035,7 @@
             "「你不需要完美才值得被认可，你只需要每天比昨天好一点点。」",
             "「形象管理不是为了讨好别人，而是为了让自己每天照镜子时更有底气。」",
             "「变帅变好看从来不是一蹴而就，而是每一个小习惯叠加出来的结果。」",
-            "「最好的气质不是穿什么，而是干净、整洁、有方向感。」"
+            "「最好的气质不是穿什么，而是干净、整洁、有方向感。」",
           ];
           var quote = quotes[Math.floor(Math.random() * quotes.length)];
 
@@ -2885,43 +3043,51 @@
           var html = "";
           html += '<div class="result-card">';
           html += '<h4 class="result-card-title">&#x1F3AF; 你的提升方向</h4>';
-          html += '<div class="result-card-body">' + direction + '</div>';
-          html += '</div>';
+          html += '<div class="result-card-body">' + direction + "</div>";
+          html += "</div>";
 
           html += '<div class="result-card">';
           html += '<h4 class="result-card-title">&#x1F455; 穿搭建议</h4>';
           html += '<div class="result-card-body"><ul>';
           for (var i = 0; i < clothes.length; i++) {
-            html += '<li>' + clothes[i] + '</li>';
+            html += "<li>" + clothes[i] + "</li>";
           }
-          html += '</ul></div></div>';
+          html += "</ul></div></div>";
 
           html += '<div class="result-card">';
           html += '<h4 class="result-card-title">&#x1F4F8; 拍照建议</h4>';
           html += '<div class="result-card-body"><ul>';
           for (var i = 0; i < photo.length; i++) {
-            html += '<li>' + photo[i] + '</li>';
+            html += "<li>" + photo[i] + "</li>";
           }
-          html += '</ul></div></div>';
+          html += "</ul></div></div>";
 
           html += '<div class="result-card">';
-          html += '<h4 class="result-card-title">&#x1F4AA; 健身 / 体态建议</h4>';
+          html +=
+            '<h4 class="result-card-title">&#x1F4AA; 健身 / 体态建议</h4>';
           html += '<div class="result-card-body"><ul>';
           for (var i = 0; i < fitness.length; i++) {
-            html += '<li>' + fitness[i] + '</li>';
+            html += "<li>" + fitness[i] + "</li>";
           }
-          html += '</ul></div></div>';
+          html += "</ul></div></div>";
 
           html += '<div class="result-card">';
           html += '<h4 class="result-card-title">&#x1F4C5; 一周小计划</h4>';
-          html += '<div class="result-card-body"><div class="result-week-plan">';
+          html +=
+            '<div class="result-card-body"><div class="result-week-plan">';
           for (var i = 0; i < weekPlan.length; i++) {
-            html += '<div class="result-week-day"><strong>' + weekPlan[i].day + '：</strong>' + weekPlan[i].task + '</div>';
+            html +=
+              '<div class="result-week-day"><strong>' +
+              weekPlan[i].day +
+              "：</strong>" +
+              weekPlan[i].task +
+              "</div>";
           }
-          html += '</div></div></div>';
+          html += "</div></div></div>";
 
-          html += '<div class="result-quote">' + quote + '</div>';
-          html += '<button class="quiz-retest-btn" id="quizRetest">&#x21BB; 重新测试</button>';
+          html += '<div class="result-quote">' + quote + "</div>";
+          html +=
+            '<button class="quiz-retest-btn" id="quizRetest">&#x21BB; 重新测试</button>';
 
           var resultEl = document.getElementById("quizResult");
           resultEl.innerHTML = html;
@@ -2931,19 +3097,23 @@
             resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
           }, 100);
 
-          document.getElementById("quizRetest").addEventListener("click", function () {
-            resultEl.classList.remove("visible");
-            setTimeout(function () {
-              resultEl.innerHTML = "";
-              quizAnswers = {};
-              document.querySelectorAll(".quiz-opt").forEach(function (b) {
-                b.classList.remove("selected");
-              });
-            }, 400);
-          });
+          document
+            .getElementById("quizRetest")
+            .addEventListener("click", function () {
+              resultEl.classList.remove("visible");
+              setTimeout(function () {
+                resultEl.innerHTML = "";
+                quizAnswers = {};
+                document.querySelectorAll(".quiz-opt").forEach(function (b) {
+                  b.classList.remove("selected");
+                });
+              }, 400);
+            });
         }
 
-        document.getElementById("quizGenerate").addEventListener("click", generateQuizResult);
+        document
+          .getElementById("quizGenerate")
+          .addEventListener("click", generateQuizResult);
 
         // ── AI Chat Widget (v2) ──
         var chatPanel = document.getElementById("chatPanel");
