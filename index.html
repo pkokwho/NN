@@ -812,6 +812,165 @@
         transform: translateY(-50%);
       }
 
+      /* ===== QUIZ TOOL ===== */
+      .quiz-question {
+        margin-bottom: 2rem;
+      }
+      .quiz-q-title {
+        font-family: "Noto Serif SC", serif;
+        font-size: 0.95rem;
+        font-weight: 400;
+        color: var(--text);
+        margin-bottom: 0.8rem;
+      }
+      .quiz-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+      .quiz-opt {
+        font-family: "Inter", "Noto Serif SC", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 300;
+        padding: 0.55rem 1.2rem;
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        background: var(--surface);
+        color: var(--text-soft);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .quiz-opt:hover {
+        border-color: var(--accent-soft);
+        color: var(--accent-dark);
+      }
+      .quiz-opt.selected {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: var(--white);
+      }
+      .quiz-actions {
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      .quiz-generate-btn {
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        padding: 0.8rem 2rem;
+        border: none;
+        border-radius: 3px;
+        background: var(--accent-dark);
+        color: var(--white);
+        cursor: pointer;
+        transition: all 0.4s ease;
+      }
+      .quiz-generate-btn:hover {
+        background: var(--text);
+        transform: translateY(-1px);
+      }
+      .quiz-error {
+        font-family: "Inter", sans-serif;
+        font-size: 0.78rem;
+        color: #c0392b;
+        min-height: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+      .quiz-result {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .quiz-result.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .result-card {
+        background: var(--surface);
+        border: 1px solid var(--border-soft);
+        border-radius: 8px;
+        padding: 2rem 2.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .result-card-title {
+        font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--text);
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid var(--border-soft);
+      }
+      .result-card-body {
+        font-size: 0.88rem;
+        font-weight: 300;
+        line-height: 2;
+        color: var(--text-soft);
+      }
+      .result-card-body ul {
+        list-style: none;
+        padding-left: 0;
+      }
+      .result-card-body li {
+        padding-left: 1.2rem;
+        position: relative;
+        margin-bottom: 0.3rem;
+      }
+      .result-card-body li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        transform: translateY(-50%);
+      }
+      .result-week-plan {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.4rem 1.5rem;
+      }
+      .result-week-day {
+        font-size: 0.82rem;
+        line-height: 1.8;
+        color: var(--text-soft);
+      }
+      .result-week-day strong {
+        color: var(--accent-dark);
+        font-weight: 500;
+      }
+      .result-quote {
+        background: var(--bg);
+        border-left: 3px solid var(--accent-soft);
+        padding: 1.2rem 1.5rem;
+        font-family: "Cormorant Garamond", serif;
+        font-style: italic;
+        font-size: 1rem;
+        color: var(--accent-dark);
+        line-height: 1.8;
+        margin-top: 1.5rem;
+      }
+      .quiz-retest-btn {
+        font-family: "Inter", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 400;
+        padding: 0.5rem 1.2rem;
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        background: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1.5rem;
+      }
+      .quiz-retest-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent-dark);
+      }
+
       /* Image Slider */
       .image-slider {
         position: relative;
@@ -1628,6 +1787,16 @@
         .video-arrow {
           display: none;
         }
+        .result-card {
+          padding: 1.5rem;
+        }
+        .result-week-plan {
+          grid-template-columns: 1fr;
+        }
+        .quiz-opt {
+          padding: 0.45rem 0.9rem;
+          font-size: 0.72rem;
+        }
       }
     </style>
   </head>
@@ -1682,7 +1851,11 @@
         <div class="nav-dot"></div>
         <span class="nav-label">作品</span>
       </div>
-      <div class="nav-dot-wrap" data-section="5" aria-label="联系">
+      <div class="nav-dot-wrap" data-section="5" aria-label="自测">
+        <div class="nav-dot"></div>
+        <span class="nav-label">自测</span>
+      </div>
+      <div class="nav-dot-wrap" data-section="6" aria-label="联系">
         <div class="nav-dot"></div>
         <span class="nav-label">联系</span>
       </div>
@@ -1703,7 +1876,8 @@
       <button class="mobile-nav-item" data-section="2">数据</button>
       <button class="mobile-nav-item" data-section="3">爱好</button>
       <button class="mobile-nav-item" data-section="4">作品</button>
-      <button class="mobile-nav-item" data-section="5">联系</button>
+      <button class="mobile-nav-item" data-section="5">自测</button>
+      <button class="mobile-nav-item" data-section="6">联系</button>
     </nav>
 
     <!-- ===== HERO ===== -->
@@ -2032,8 +2206,92 @@
       </div>
     </section>
 
-    <!-- ===== CONTACT ===== -->
+    <!-- ===== QUIZ ===== -->
     <section class="section" data-index="5">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-label">自测</p>
+          <h2 class="section-heading">形象提升自测工具</h2>
+        </div>
+        <div class="reveal reveal-d2">
+          <p class="about-text" style="max-width:680px;margin-bottom:2rem">
+            通过几个简单问题，获得适合你的穿搭、拍照、健身和气质提升建议。本工具不进行颜值评分或身材打分，只提供积极、健康、实用的个人提升建议。
+          </p>
+          <div class="hobby-card" style="margin-bottom:1.5rem;padding:1.5rem 2rem">
+            <p class="hobby-desc" style="margin:0;font-size:0.82rem">
+              💡 安全提示：本工具不会上传图片，不会保存你的信息，不进行颜值评分、身材打分、身份识别或隐私判断。结果仅供参考，重点是帮助你变得更自信、更清爽、更有方向。
+            </p>
+          </div>
+        </div>
+        <div class="reveal reveal-d3" style="max-width:700px">
+          <!-- 问题 1 -->
+          <div class="quiz-question" data-q="1">
+            <p class="quiz-q-title">1. 你最想提升哪个方面？</p>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-value="穿搭形象">穿搭形象</button>
+              <button class="quiz-opt" data-value="拍照表现">拍照表现</button>
+              <button class="quiz-opt" data-value="健身状态">健身状态</button>
+              <button class="quiz-opt" data-value="发型气质">发型气质</button>
+              <button class="quiz-opt" data-value="整体自信感">整体自信感</button>
+            </div>
+          </div>
+          <!-- 问题 2 -->
+          <div class="quiz-question" data-q="2">
+            <p class="quiz-q-title">2. 你现在最大的困扰是什么？</p>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-value="不知道怎么搭配衣服">不知道怎么搭配衣服</button>
+              <button class="quiz-opt" data-value="拍照看起来不自然">拍照看起来不自然</button>
+              <button class="quiz-opt" data-value="身材管理没有方向">身材管理没有方向</button>
+              <button class="quiz-opt" data-value="不知道适合什么风格">不知道适合什么风格</button>
+              <button class="quiz-opt" data-value="看起来不够精神">看起来不够精神</button>
+            </div>
+          </div>
+          <!-- 问题 3 -->
+          <div class="quiz-question" data-q="3">
+            <p class="quiz-q-title">3. 你喜欢哪种风格？</p>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-value="清爽简约">清爽简约</button>
+              <button class="quiz-opt" data-value="阳光运动">阳光运动</button>
+              <button class="quiz-opt" data-value="干净少年感">干净少年感</button>
+              <button class="quiz-opt" data-value="稳重成熟">稳重成熟</button>
+              <button class="quiz-opt" data-value="韩系休闲">韩系休闲</button>
+            </div>
+          </div>
+          <!-- 问题 4 -->
+          <div class="quiz-question" data-q="4">
+            <p class="quiz-q-title">4. 你主要使用场景是什么？</p>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-value="学校日常">学校日常</button>
+              <button class="quiz-opt" data-value="朋友聚会">朋友聚会</button>
+              <button class="quiz-opt" data-value="拍照发朋友圈">拍照发朋友圈</button>
+              <button class="quiz-opt" data-value="面试展示">面试展示</button>
+              <button class="quiz-opt" data-value="日常变帅变精神">日常变帅变精神</button>
+            </div>
+          </div>
+          <!-- 问题 5 -->
+          <div class="quiz-question" data-q="5">
+            <p class="quiz-q-title">5. 你希望建议偏向哪种类型？</p>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-value="简单直接">简单直接</button>
+              <button class="quiz-opt" data-value="详细一点">详细一点</button>
+              <button class="quiz-opt" data-value="适合学生预算">适合学生预算</button>
+              <button class="quiz-opt" data-value="偏运动健身">偏运动健身</button>
+              <button class="quiz-opt" data-value="偏穿搭拍照">偏穿搭拍照</button>
+            </div>
+          </div>
+          <!-- 操作按钮 -->
+          <div class="quiz-actions">
+            <button class="quiz-generate-btn" id="quizGenerate">生成建议 &#x2192;</button>
+          </div>
+          <p class="quiz-error" id="quizError"></p>
+          <!-- 结果区 -->
+          <div class="quiz-result" id="quizResult"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section" data-index="6">
       <div class="container">
         <div class="contact-layout">
           <div class="reveal">
@@ -2503,6 +2761,189 @@
         document.addEventListener("keydown", function (e) {
           if (e.key === "Escape" && pModalOpen) closeProjectModal();
         });
+
+        // ── Quiz Tool ──
+        var quizAnswers = {};
+        document.querySelectorAll(".quiz-opt").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var qNum = this.closest(".quiz-question").getAttribute("data-q");
+            this.closest(".quiz-options").querySelectorAll(".quiz-opt").forEach(function (b) {
+              b.classList.remove("selected");
+            });
+            this.classList.add("selected");
+            quizAnswers[qNum] = this.getAttribute("data-value");
+            document.getElementById("quizError").textContent = "";
+          });
+        });
+
+        function generateQuizResult() {
+          var err = document.getElementById("quizError");
+          if (Object.keys(quizAnswers).length < 5) {
+            err.textContent = "请先完成所有选项哦~";
+            return;
+          }
+          err.textContent = "";
+
+          var a1 = quizAnswers[1], a2 = quizAnswers[2], a3 = quizAnswers[3], a4 = quizAnswers[4], a5 = quizAnswers[5];
+          var isStudent = (a5 === "适合学生预算");
+          var isDetailed = (a5 === "详细一点");
+          var isFitness = (a5 === "偏运动健身");
+          var isStyle = (a5 === "偏穿搭拍照");
+
+          // 提升方向
+          var direction = "你的核心提升方向：「" + a1 + "」，风格偏好「" + a3 + "」，主要场景是「" + a4 + "」";
+
+          // 穿搭建议
+          var clothes = [];
+          if (a1 === "穿搭形象" || isStyle) {
+            clothes.push("选择基础款为主：纯色 T 恤/衬衫 + 直筒裤，干净利落就是最大的加分项");
+            clothes.push("颜色不超过 3 种，黑/白/灰/藏蓝/卡其最百搭");
+            if (a3 === "清爽简约" || a3 === "干净少年感") {
+              clothes.push("白 T + 浅色牛仔裤 + 小白鞋，永远不出错的组合");
+            }
+            if (a3 === "阳光运动") {
+              clothes.push("运动风 Polo + 运动裤 + 跑鞋，活力满满");
+            }
+            if (a3 === "稳重成熟") {
+              clothes.push("深色衬衫 + 西裤 + 皮鞋，正式场合加分");
+            }
+            if (a3 === "韩系休闲") {
+              clothes.push("宽松针织衫 + 阔腿裤 + 帆布鞋，慵懒有型");
+            }
+          } else {
+            clothes.push("穿搭不需要复杂，干净整洁是第一步，衣服熨平整、鞋子刷干净就够了");
+            clothes.push("基础款打底，慢慢找到适合自己的风格");
+          }
+          if (isStudent) {
+            clothes.push("学生党预算有限，买少而精，基础款比花里胡哨的更耐穿");
+          }
+
+          // 拍照建议
+          var photo = [];
+          if (a1 === "拍照表现" || isStyle) {
+            photo.push("光线是最好的滤镜，选择下午 4-6 点的自然光拍摄");
+            photo.push("不要僵硬地笑，可以侧身看远方或低头微笑，更自然");
+            photo.push("背景选干净的墙面或草地，避免杂乱环境抢镜");
+          } else {
+            photo.push("拍照时挺胸收腹、肩膀向后打开，气质立刻提升 50%");
+            photo.push("不要一直看镜头，自然状态最好看");
+          }
+          if (a2 === "拍照看起来不自然") {
+            photo.push("先练习「不看镜头」的照片，习惯了再慢慢面对镜头");
+          }
+
+          // 健身建议
+          var fitness = [];
+          if (a1 === "健身状态" || isFitness) {
+            fitness.push("每周 3 次基础运动，每次 20-30 分钟即可，贵在坚持");
+            fitness.push("注意体态：挺胸、收腹、肩膀打开，这是最快提升气质的方法");
+            fitness.push("不要久坐，每坐 1 小时站起来活动 5 分钟");
+          } else {
+            fitness.push("体态比身材更重要，挺胸收腹走路，整个人看起来精神很多");
+            fitness.push("每天做 10 个俯卧撑，慢慢增加，不需要去健身房");
+          }
+          if (a2 === "看起来不够精神") {
+            fitness.push("早睡早起 + 运动出汗，是最好的美容品");
+          }
+          if (isStudent) {
+            fitness.push("学校操场跑步是最便宜的健身方式，不需要任何装备");
+          }
+
+          // 一周计划
+          var weekPlan = [
+            { day: "周一", task: "整理衣柜，搭配 3 套基础穿搭" },
+            { day: "周二", task: "练习 5 分钟拍照姿势（对镜或让朋友帮拍）" },
+            { day: "周三", task: "做 20 分钟运动（跑步/俯卧撑/深蹲）" },
+            { day: "周四", task: "学习一个穿搭技巧，整理发型" },
+            { day: "周五", task: "用新穿搭拍一张自然照片" },
+            { day: "周六", task: "复盘本周变化，记录感受" },
+            { day: "周日", task: "休息调整，准备下周继续" }
+          ];
+          if (isFitness) {
+            weekPlan = [
+              { day: "周一", task: "跑步 20 分钟 + 拉伸" },
+              { day: "周二", task: "俯卧撑 3 组 x 10 个" },
+              { day: "周三", task: "深蹲 3 组 x 15 个" },
+              { day: "周四", task: "跑步 20 分钟 + 拉伸" },
+              { day: "周五", task: "核心训练（平板支撑 3 组）" },
+              { day: "周六", task: "自由运动或休息" },
+              { day: "周日", task: "完全休息，拉伸放松" }
+            ];
+          }
+
+          // 鼓励语
+          var quotes = [
+            "「真正的提升不是变成别人，而是让自己越来越清爽、自信、有方向。」",
+            "「你不需要完美才值得被认可，你只需要每天比昨天好一点点。」",
+            "「形象管理不是为了讨好别人，而是为了让自己每天照镜子时更有底气。」",
+            "「变帅变好看从来不是一蹴而就，而是每一个小习惯叠加出来的结果。」",
+            "「最好的气质不是穿什么，而是干净、整洁、有方向感。」"
+          ];
+          var quote = quotes[Math.floor(Math.random() * quotes.length)];
+
+          // 渲染结果
+          var html = "";
+          html += '<div class="result-card">';
+          html += '<h4 class="result-card-title">&#x1F3AF; 你的提升方向</h4>';
+          html += '<div class="result-card-body">' + direction + '</div>';
+          html += '</div>';
+
+          html += '<div class="result-card">';
+          html += '<h4 class="result-card-title">&#x1F455; 穿搭建议</h4>';
+          html += '<div class="result-card-body"><ul>';
+          for (var i = 0; i < clothes.length; i++) {
+            html += '<li>' + clothes[i] + '</li>';
+          }
+          html += '</ul></div></div>';
+
+          html += '<div class="result-card">';
+          html += '<h4 class="result-card-title">&#x1F4F8; 拍照建议</h4>';
+          html += '<div class="result-card-body"><ul>';
+          for (var i = 0; i < photo.length; i++) {
+            html += '<li>' + photo[i] + '</li>';
+          }
+          html += '</ul></div></div>';
+
+          html += '<div class="result-card">';
+          html += '<h4 class="result-card-title">&#x1F4AA; 健身 / 体态建议</h4>';
+          html += '<div class="result-card-body"><ul>';
+          for (var i = 0; i < fitness.length; i++) {
+            html += '<li>' + fitness[i] + '</li>';
+          }
+          html += '</ul></div></div>';
+
+          html += '<div class="result-card">';
+          html += '<h4 class="result-card-title">&#x1F4C5; 一周小计划</h4>';
+          html += '<div class="result-card-body"><div class="result-week-plan">';
+          for (var i = 0; i < weekPlan.length; i++) {
+            html += '<div class="result-week-day"><strong>' + weekPlan[i].day + '：</strong>' + weekPlan[i].task + '</div>';
+          }
+          html += '</div></div></div>';
+
+          html += '<div class="result-quote">' + quote + '</div>';
+          html += '<button class="quiz-retest-btn" id="quizRetest">&#x21BB; 重新测试</button>';
+
+          var resultEl = document.getElementById("quizResult");
+          resultEl.innerHTML = html;
+
+          setTimeout(function () {
+            resultEl.classList.add("visible");
+            resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 100);
+
+          document.getElementById("quizRetest").addEventListener("click", function () {
+            resultEl.classList.remove("visible");
+            setTimeout(function () {
+              resultEl.innerHTML = "";
+              quizAnswers = {};
+              document.querySelectorAll(".quiz-opt").forEach(function (b) {
+                b.classList.remove("selected");
+              });
+            }, 400);
+          });
+        }
+
+        document.getElementById("quizGenerate").addEventListener("click", generateQuizResult);
 
         // ── AI Chat Widget (v2) ──
         var chatPanel = document.getElementById("chatPanel");
