@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="zh-CN" data-version="20260603">
+<html lang="zh-CN" data-version="20260604">
   <head>
     <meta charset="UTF-8" />
-    <meta name="version" content="20260603" />
+    <meta name="version" content="20260604" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       http-equiv="Cache-Control"
@@ -58,7 +58,6 @@
       }
 
       html {
-        scroll-behavior: smooth;
       }
 
       body {
@@ -68,7 +67,6 @@
         line-height: 1.7;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        overflow-x: hidden;
       }
 
       ::selection {
@@ -162,13 +160,25 @@
       /* ===== SECTIONS ===== */
       .section {
         min-height: 100vh;
-        display: flex;
+        display: none;
         align-items: center;
         padding: 8rem 0;
         position: relative;
       }
+      .section.active {
+        display: flex;
+        animation: sectionFadeIn 0.5s ease forwards;
+      }
       .section:last-of-type {
         min-height: auto;
+      }
+      @keyframes sectionFadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       /* ===== REVEAL ===== */
@@ -1801,8 +1811,6 @@
     </style>
   </head>
   <body>
-    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-
     <div class="lightbox" id="lightbox" aria-hidden="true">
       <button class="lightbox-close" id="lightboxClose" aria-label="关闭">
         &times;
@@ -1867,9 +1875,6 @@
       </div>
     </nav>
 
-    <button class="back-to-top" id="backToTop" aria-label="返回顶部">
-      &uarr;
-    </button>
 
     <nav
       class="mobile-nav"
@@ -1906,10 +1911,6 @@
             <span class="hero-tag">网页设计</span>
             <span class="hero-tag">设计师</span>
           </div>
-        </div>
-        <div class="scroll-indicator">
-          <div class="scroll-line"></div>
-          <span>Scroll</span>
         </div>
       </div>
     </section>
@@ -2218,39 +2219,6 @@
               查看详情 &#x2197;
             </button>
           </div>
-          <div class="hobby-card reveal reveal-d5">
-            <div class="hobby-card-header">
-              <span class="hobby-icon">&#x1F4F0;</span>
-              <span class="hobby-card-num">05</span>
-            </div>
-            <span class="project-status iterating">持续迭代</span>
-            <h3 class="hobby-title">每日重点资讯</h3>
-            <p class="hobby-desc">
-              一个自动整理
-              AI、国内与国际重点新闻的资讯项目，支持每日抓取、分类展示和中文摘要，方便快速了解值得关注的信息。
-            </p>
-            <ul class="project-highlights">
-              <li>自动整理 AI、国内、国际重点新闻</li>
-              <li>支持中文摘要和重点分类</li>
-              <li>按板块展示不同类型资讯</li>
-            </ul>
-            <div class="hobby-tags">
-              <span class="hobby-tag">新闻抓取</span>
-              <span class="hobby-tag">GitHub Actions</span>
-              <span class="hobby-tag">GitHub Pages</span>
-              <span class="hobby-tag">自动化</span>
-            </div>
-            <button
-              class="project-view-btn"
-              data-project="ai-news"
-              onclick="
-                window.open('https://pkokwho.github.io/zq/', '_blank');
-                event.stopPropagation();
-              "
-            >
-              查看项目 &#x2197;
-            </button>
-          </div>
         </div>
       </div>
     </section>
@@ -2475,56 +2443,47 @@
 
     <script>
       (function () {
-        // Scroll Progress + Back to Top
-        var sp = document.getElementById("scrollProgress");
-        var btt = document.getElementById("backToTop");
-        window.addEventListener(
-          "scroll",
-          function () {
-            var st = window.pageYOffset || document.documentElement.scrollTop;
-            var sh = document.documentElement.scrollHeight - window.innerHeight;
-            sp.style.width = (st / sh) * 100 + "%";
-            if (btt) btt.classList.toggle("visible", st > 400);
-          },
-          { passive: true },
-        );
-        if (btt) {
-          btt.addEventListener("click", function () {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+        // Section switching
+        var currentSection = 0;
+        var sections = document.querySelectorAll(".section");
+        var wraps = document.querySelectorAll(".nav-dot-wrap");
+        var mNav = document.getElementById("mobileNav");
+        var mItems = document.querySelectorAll(".mobile-nav-item");
+
+        function switchSection(idx) {
+          if (idx === currentSection) return;
+          sections[currentSection].classList.remove("active");
+          sections[idx].classList.add("active");
+          wraps.forEach(function (w, i) {
+            w.querySelector(".nav-dot").classList.toggle("active", i === idx);
+          });
+          mItems.forEach(function (mi, i) {
+            mi.classList.toggle("active", i === idx);
+          });
+          currentSection = idx;
+          window.scrollTo(0, 0);
+          // Trigger reveal animations for the new section
+          var newReveals = sections[idx].querySelectorAll(".reveal");
+          newReveals.forEach(function (el) {
+            el.classList.add("visible");
+          });
+          var newArtLines = sections[idx].querySelectorAll(".art-line");
+          newArtLines.forEach(function (el) {
+            el.classList.add("visible");
           });
         }
 
-        // Nav dots
-        var sections = document.querySelectorAll(".section");
-        var wraps = document.querySelectorAll(".nav-dot-wrap");
+        // Initialize first section
+        sections[0].classList.add("active");
+
+        // Nav dots click
         wraps.forEach(function (w, i) {
           w.addEventListener("click", function () {
-            sections[i].scrollIntoView({ behavior: "smooth" });
+            switchSection(i);
           });
-        });
-        var secObs = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) {
-                var idx = parseInt(e.target.dataset.index);
-                wraps.forEach(function (w, i) {
-                  w.querySelector(".nav-dot").classList.toggle(
-                    "active",
-                    i === idx,
-                  );
-                });
-              }
-            });
-          },
-          { threshold: 0.4 },
-        );
-        sections.forEach(function (s) {
-          secObs.observe(s);
         });
 
         // Mobile nav
-        var mNav = document.getElementById("mobileNav");
-        var mItems = document.querySelectorAll(".mobile-nav-item");
         if (mNav && window.innerWidth <= 480) mNav.style.display = "flex";
         window.addEventListener("resize", function () {
           if (mNav)
@@ -2532,52 +2491,16 @@
         });
         mItems.forEach(function (mi, i) {
           mi.addEventListener("click", function () {
-            sections[i].scrollIntoView({ behavior: "smooth" });
+            switchSection(i);
           });
         });
-        var mNavObs = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) {
-                var idx = parseInt(e.target.dataset.index);
-                mItems.forEach(function (mi, i) {
-                  mi.classList.toggle("active", i === idx);
-                });
-              }
-            });
-          },
-          { threshold: 0.4 },
-        );
-        sections.forEach(function (s) {
-          mNavObs.observe(s);
-        });
 
-        // Reveal animations
-        var reveals = document.querySelectorAll(".reveal");
-        var revObs = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) e.target.classList.add("visible");
-            });
-          },
-          { threshold: 0.1 },
-        );
-        reveals.forEach(function (el) {
-          revObs.observe(el);
+        // Reveal animations - show all reveals in active section on load
+        sections[0].querySelectorAll(".reveal").forEach(function (el) {
+          el.classList.add("visible");
         });
-
-        // Art lines
-        var artLines = document.querySelectorAll(".art-line");
-        var artObs = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) e.target.classList.add("visible");
-            });
-          },
-          { threshold: 0.3 },
-        );
-        artLines.forEach(function (el) {
-          artObs.observe(el);
+        sections[0].querySelectorAll(".art-line").forEach(function (el) {
+          el.classList.add("visible");
         });
 
         // Hero parallax
@@ -2801,30 +2724,6 @@
               "理解了设计系统和一致性的重要性",
               "培养了审美和交互思维",
             ],
-          },
-          "ai-news": {
-            name: "每日重点资讯",
-            status: { label: "持续迭代", cls: "iterating" },
-            tech: [
-              "新闻抓取",
-              "GitHub Actions",
-              "GitHub Pages",
-              "自动化",
-              "中文摘要",
-            ],
-            highlights: [
-              "自动整理 AI、国内、国际重点新闻",
-              "支持中文摘要和重点分类",
-              "按板块展示不同类型资讯",
-              "每日自动更新，适合作为自动化信息整理练习项目",
-            ],
-            learnings: [
-              "练习自动化信息整理",
-              "学习如何把数据整理成网页",
-              "让个人网站作品区更丰富",
-              "展示对 AI 工具和前端项目的学习过程",
-            ],
-            link: "https://pkokwho.github.io/zq/",
           },
         };
 
