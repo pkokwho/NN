@@ -67,9 +67,20 @@ async function run() {
   console.log("\n[前端 API 配置]");
   var indexHtml = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
   assert(
-    /var CHAT_API = "https:\/\/[a-z0-9-]+\.[a-z0-9-]+\.workers\.dev";/.test(indexHtml),
-    "GitHub Pages 前端使用 HTTPS Worker API"
+    indexHtml.indexOf('var CHAT_API = "https://nn-personal-website.pages.dev";') !== -1,
+    "GitHub Pages 前端使用 Cloudflare Pages API"
   );
+
+  var pagesWorkerPath = path.join(__dirname, "..", "pages-api", "_worker.js");
+  var pagesWorkerExists = fs.existsSync(pagesWorkerPath);
+  assert(pagesWorkerExists, "Cloudflare Pages API 入口存在");
+  if (pagesWorkerExists) {
+    var pagesWorkerSource = fs.readFileSync(pagesWorkerPath, "utf8");
+    assert(
+      pagesWorkerSource.indexOf('export { default } from "../worker.js";') !== -1,
+      "Cloudflare Pages API 复用 Worker 实现"
+    );
+  }
 
   var workerSource = fs.readFileSync(path.join(__dirname, "..", "worker.js"), "utf8");
   var wranglerConfig = fs.readFileSync(path.join(__dirname, "..", "wrangler.toml"), "utf8");
