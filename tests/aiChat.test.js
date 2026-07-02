@@ -1,5 +1,7 @@
 require("dotenv").config({ path: require("path").join(__dirname, "..", ".env") });
 
+const fs = require("fs");
+const path = require("path");
 const aiChat = require("../services/aiChat");
 
 var passed = 0;
@@ -57,11 +59,31 @@ async function run() {
   var hasKey = !!process.env.AI_CHAT_API_KEY;
   assert(hasKey, ".env 中 AI_CHAT_API_KEY 已配置");
   assert(
-    process.env.AI_CHAT_API_KEY.indexOf("apisk-") === 0,
-    "API 密钥格式以 apisk- 开头"
+    process.env.AI_CHAT_API_KEY.indexOf("sk-") === 0,
+    "DeepSeek API 密钥格式以 sk- 开头"
   );
 
-  // 6. 实际 API 调用
+  // 6. 前端 API 配置
+  console.log("\n[前端 API 配置]");
+  var indexHtml = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+  assert(
+    /var CHAT_API = "https:\/\/[a-z0-9-]+\.[a-z0-9-]+\.workers\.dev";/.test(indexHtml),
+    "GitHub Pages 前端使用 HTTPS Worker API"
+  );
+
+  var workerSource = fs.readFileSync(path.join(__dirname, "..", "worker.js"), "utf8");
+  var wranglerConfig = fs.readFileSync(path.join(__dirname, "..", "wrangler.toml"), "utf8");
+  assert(
+    workerSource.indexOf('env.AI_CHAT_MODEL || "deepseek-v4-flash"') !== -1 &&
+      wranglerConfig.indexOf('AI_CHAT_MODEL = "deepseek-v4-flash"') !== -1,
+    "Worker 默认使用最便宜的 DeepSeek V4 Flash 模型"
+  );
+  assert(
+    workerSource.indexOf("var chatHistory = [];") === -1,
+    "Worker 不跨访客共享聊天历史"
+  );
+
+  // 7. 实际 API 调用
   if (hasKey) {
     console.log("\n[实际 API 调用]");
     try {
@@ -74,7 +96,7 @@ async function run() {
       failed++;
     }
 
-    // 7. 多轮对话
+    // 8. 多轮对话
     console.log("\n[多轮对话]");
     var hBefore = aiChat.getHistory().length;
     var r2 = await aiChat.sendMessage("我主人是谁？").catch(function () { return null; });
