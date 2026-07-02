@@ -1306,6 +1306,45 @@
         z-index: 998;
         font-family: "Inter", "Noto Serif SC", sans-serif;
       }
+      .chat-hint {
+        position: fixed;
+        bottom: 4.8rem;
+        right: 2.5rem;
+        z-index: 997;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        pointer-events: none;
+        opacity: 0;
+        animation: chatHintIn 0.5s ease 1.5s forwards, chatHintOut 0.5s ease 4s forwards;
+      }
+      .chat-hint-text {
+        background: var(--text);
+        color: var(--white);
+        font-family: "Inter", "Noto Serif SC", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 400;
+        padding: 0.45rem 0.9rem;
+        border-radius: 8px;
+        white-space: nowrap;
+        box-shadow: 0 2px 12px var(--shadow);
+      }
+      .chat-hint-arrow {
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid var(--text);
+      }
+      @keyframes chatHintIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes chatHintOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(8px); }
+      }
       .chat-toggle {
         width: 44px;
         height: 44px;
@@ -2386,6 +2425,10 @@
       </div>
     </footer>
 
+    <div class="chat-hint" id="chatHint">
+      <span class="chat-hint-text">有问题？试试 AI 助手 👇</span>
+      <span class="chat-hint-arrow"></span>
+    </div>
     <div class="chat-widget" id="chatWidget" aria-label="AI智能助手">
       <button
         class="chat-toggle"
@@ -3021,6 +3064,14 @@
           .getElementById("quizGenerate")
           .addEventListener("click", generateQuizResult);
 
+        // ── AI Chat Hint (auto-dismiss after 3s) ──
+        var chatHint = document.getElementById("chatHint");
+        if (chatHint) {
+          setTimeout(function () {
+            chatHint.remove();
+          }, 5000);
+        }
+
         // ── AI Chat Widget (v2) ──
         var chatPanel = document.getElementById("chatPanel");
         var chatToggle = document.getElementById("chatToggle");
@@ -3035,7 +3086,7 @@
         var isChatLoading = false;
         var MAX_RETRY = 3;
         var RETRY_DELAY = 1500;
-        var CHAT_API = "https://api.rnyznb.xyz";
+        var CHAT_API = "https://nn-chat.2493580059.workers.dev";
 
         function openChat() {
           isChatOpen = true;
